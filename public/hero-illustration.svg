@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" viewBox="0 0 800 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Shapes -->
+  <rect x="100" y="50" width="600" height="300" rx="20" fill="#E5F3FF" />
+  
+  <!-- Abstract Portal Elements -->
+  <circle cx="400" cy="200" r="120" stroke="#3B82F6" stroke-width="8" fill="white" />
+  <circle cx="400" cy="200" r="80" stroke="#60A5FA" stroke-width="6" fill="white" opacity="0.8" />
+  <circle cx="400" cy="200" r="40" stroke="#93C5FD" stroke-width="4" fill="white" opacity="0.6" />
+  
+  <!-- Floating Elements -->
+  <g transform="rotate(15, 400, 200)">
+    <rect x="520" y="140" width="40" height="40" rx="8" fill="#3B82F6" opacity="0.8" />
+    <rect x="540" y="180" width="30" height="30" rx="6" fill="#60A5FA" opacity="0.6" />
+    <rect x="560" y="220" width="20" height="20" rx="4" fill="#93C5FD" opacity="0.4" />
+  </g>
+  
+  <g transform="rotate(-15, 400, 200)">
+    <rect x="240" y="140" width="40" height="40" rx="8" fill="#3B82F6" opacity="0.8" />
+    <rect x="230" y="180" width="30" height="30" rx="6" fill="#60A5FA" opacity="0.6" />
+    <rect x="220" y="220" width="20" height="20" rx="4" fill="#93C5FD" opacity="0.4" />
+  </g>
+  
+  <!-- Connection Lines -->
+  <path d="M280 120 Q 400 50 520 120" stroke="#3B82F6" stroke-width="3" fill="none" opacity="0.5" />
+  <path d="M280 280 Q 400 350 520 280" stroke="#3B82F6" stroke-width="3" fill="none" opacity="0.5" />
+  
+  <!-- Decorative Dots -->
+  <circle cx="200" cy="100" r="4" fill="#3B82F6" />
+  <circle cx="600" cy="100" r="4" fill="#3B82F6" />
+  <circle cx="200" cy="300" r="4" fill="#3B82F6" />
+  <circle cx="600" cy="300" r="4" fill="#3B82F6" />
+</svg> 
