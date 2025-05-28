@@ -7,7 +7,7 @@
           <!-- Logo/Brand -->
           <div class="flex items-center">
             <router-link to="/" class="text-xl font-bold text-blue-600">
-              Portal Workshop
+              Rationality Workshops
             </router-link>
           </div>
 

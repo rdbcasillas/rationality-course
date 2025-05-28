@@ -3,7 +3,7 @@
     <!-- Hero Section -->
     <div class="text-center max-w-3xl mx-auto">
       <h1 class="text-4xl md:text-5xl font-bold mb-4 font-display">
-        Portal Workshop Series
+        Rationality Workshop Series
       </h1>
       <p class="text-xl md:text-2xl text-gray-600 mb-8">
         A 12-week journey to sharpen your rationality skills
@@ -13,7 +13,7 @@
       <div class="mb-12">
         <img
           src="/hero-illustration.svg"
-          alt="Portal Workshop Series Illustration"
+          alt="Rationality Workshop Series Illustration"
           class="w-full max-w-lg mx-auto"
           loading="lazy"
         />
