@@ -69,7 +69,7 @@
 export default {
   data() {
     return {
-      formLink: 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform',
+      formLink: 'https://docs.google.com/forms/d/e/1FAIpQLSehIdx4majRu8hARjXAFTGrEWNljs3Ut60yWh6eFfEuqrfEwA/viewform',
       features: [
         {
           title: 'Systematic Reasoning',

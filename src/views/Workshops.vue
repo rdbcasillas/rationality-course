@@ -4,9 +4,40 @@
       Workshop Series
     </h1>
 
+    <!-- Category Filters -->
+    <div class="mb-8">
+      <div class="flex flex-wrap gap-2 justify-center">
+        <button
+          @click="activeCategory = ''"
+          :class="[
+            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
+            !activeCategory 
+              ? 'bg-gray-900 text-white shadow-md' 
+              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+          ]"
+        >
+          All Workshops
+        </button>
+        <button
+          v-for="category in uniqueCategories"
+          :key="category"
+          @click="activeCategory = category"
+          :class="[
+            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
+            activeCategory === category
+              ? getCategoryActiveStyle(category)
+              : getCategoryInactiveStyle(category)
+          ]"
+        >
+          {{ category }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Workshop Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <div
-        v-for="workshop in workshops"
+        v-for="workshop in filteredWorkshops"
         :key="workshop.slug"
         class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in border border-gray-100/40 backdrop-blur-sm"
       >
@@ -82,11 +113,34 @@
 export default {
   data() {
     return {
+      activeCategory: '',
+      categoryStyles: {
+        'Foundations': {
+          active: 'bg-blue-600 text-white shadow-md',
+          inactive: 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+        },
+        'Self-Awareness': {
+          active: 'bg-purple-600 text-white shadow-md',
+          inactive: 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+        },
+        'Critical Thinking': {
+          active: 'bg-indigo-600 text-white shadow-md',
+          inactive: 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'
+        },
+        'Decision Making': {
+          active: 'bg-green-600 text-white shadow-md',
+          inactive: 'bg-green-100 text-green-700 hover:bg-green-200'
+        },
+        'Implementation': {
+          active: 'bg-yellow-600 text-white shadow-md',
+          inactive: 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
+        }
+      },
       workshops: [
         {
           number: 1,
           emoji: '🤔',
-          title: 'When You\'re Not Sure',
+          title: 'Noticing Confusion',
           subtitle: 'Learning to Notice Uncertainty',
           goal: 'Help participants tune into moments of confusion and use them as a signal to explore further.',
           coreIdeas: [
@@ -116,7 +170,7 @@ export default {
         {
           number: 3,
           emoji: '🧠',
-          title: 'Stories We Tell Ourselves',
+          title: 'Catching Self-Deception',
           subtitle: 'Catching Self-Deception',
           goal: 'Train people to notice when they\'re protecting a belief because it\'s comfortable, not because it\'s true.',
           coreIdeas: [
@@ -146,7 +200,7 @@ export default {
         {
           number: 5,
           emoji: '🎯',
-          title: 'What Do You Really Want?',
+          title: 'Untangling Goals & Trade-offs',
           subtitle: 'Untangling Goals and Trade-offs',
           goal: 'Help participants get clarity on what they truly care about and notice when their goals are working against each other.',
           coreIdeas: [
@@ -191,7 +245,7 @@ export default {
         {
           number: 8,
           emoji: '🤔',
-          title: 'Choosing Well When Stakes Are High',
+          title: 'Choosing Under High Stakes',
           subtitle: 'Making Clear Decisions Under Pressure',
           goal: 'Offer tools to weigh tough decisions more clearly, without falling into paralysis or anxiety.',
           coreIdeas: [
@@ -251,7 +305,7 @@ export default {
         {
           number: 12,
           emoji: '🔄',
-          title: 'Living What You Learn',
+          title: 'Integration & Reflection',
           subtitle: 'Integrating Rationality into Real Life',
           goal: 'Help participants reflect on their journey, notice shifts, and design ways to continue growing.',
           coreIdeas: [
@@ -264,6 +318,25 @@ export default {
           slug: 'integration'
         }
       ]
+    }
+  },
+  computed: {
+    filteredWorkshops() {
+      if (!this.activeCategory) {
+        return this.workshops;
+      }
+      return this.workshops.filter(workshop => workshop.category === this.activeCategory);
+    },
+    uniqueCategories() {
+      return [...new Set(this.workshops.map(workshop => workshop.category))].sort();
+    }
+  },
+  methods: {
+    getCategoryActiveStyle(category) {
+      return this.categoryStyles[category]?.active || 'bg-gray-600 text-white shadow-md';
+    },
+    getCategoryInactiveStyle(category) {
+      return this.categoryStyles[category]?.inactive || 'bg-gray-100 text-gray-700 hover:bg-gray-200';
     }
   }
 }
