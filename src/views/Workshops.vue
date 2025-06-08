@@ -75,7 +75,7 @@
 
           <!-- Learn More Link -->
           <div class="mt-6 flex items-center justify-between">
-            <router-link
+            <!-- <router-link
               :to="{ name: 'WorkshopDetail', params: { slug: workshop.slug }}"
               class="text-primary-600 hover:text-primary-700 font-medium text-sm inline-flex items-center group/link"
             >
@@ -93,7 +93,7 @@
                   d="M9 5l7 7-7 7"
                 />
               </svg>
-            </router-link>
+            </router-link> -->
             <span 
               :class="[
                 'px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300',
