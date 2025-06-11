@@ -641,10 +641,10 @@ export default {
         };
 
         // Submit to Airtable
-        const response = await fetch('https://api.airtable.com/v0/app8MzxWXV81Qok7x/Submissions', {
+        const response = await fetch(`https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Submissions`, {
           method: 'POST',
           headers: {
-            'Authorization': 'Bearer patSTSQKWGMYpa93B.2c67a47d666d3cf094883ecc00e44ad98a7fa70871a1a0ee1e940a3996d12461',
+            'Authorization': `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(airtableData)
