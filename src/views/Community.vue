@@ -11,7 +11,7 @@
 
     <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
       <div class="prose prose-lg mx-auto">
-        <h2 class="text-2xl font-semibold mb-4 font-display">Why Join?</h2>
+        <h2 class="text-2xl font-semibold mb-4 font-display">Why Join Our WhatsApp Community?</h2>
         <ul class="space-y-4">
           <li class="flex items-start">
             <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
@@ -23,11 +23,15 @@
           </li>
           <li class="flex items-start">
             <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Access exclusive resources and discussion threads</span>
+            <span>Get updates on upcoming workshops and events</span>
           </li>
           <li class="flex items-start">
             <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Participate in regular community events and challenges</span>
+            <span>Access exclusive learning resources and discussions</span>
+          </li>
+          <li class="flex items-start">
+            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
+            <span>Participate in community challenges and reflection exercises</span>
           </li>
         </ul>
 
@@ -73,8 +77,8 @@
 export default {
   data() {
     return {
-      platform: 'Discord', // or 'Telegram'
-      communityLink: 'https://discord.gg/YOUR-INVITE-LINK' // Replace with actual link
+      platform: 'WhatsApp',
+      communityLink: 'https://chat.whatsapp.com/J6tNENeW9O5HvJLOE9jffR'
     }
   }
 }

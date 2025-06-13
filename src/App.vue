@@ -87,6 +87,64 @@
         </transition>
       </router-view>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- About Section -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Rationality Workshop Series</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              A 12-week journey to develop clearer thinking, better decision-making, and more effective problem-solving skills through practical rationality techniques.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <router-link to="/workshops" class="text-gray-300 hover:text-white text-sm transition-colors">
+                  Workshop Series
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/community" class="text-gray-300 hover:text-white text-sm transition-colors">
+                  Join Community
+                </router-link>
+              </li>
+              <li>
+                <a href="https://www.lesswrong.com" target="_blank" rel="noopener" class="text-gray-300 hover:text-white text-sm transition-colors">
+                  LessWrong
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Get in Touch</h3>
+            <p class="text-gray-300 text-sm mb-3">
+              Have questions about the workshops or want to learn more?
+            </p>
+            <div class="text-sm">
+              <p class="text-gray-300">Reach out to:</p>
+              <a href="mailto:contact@rationalityworkshops.com" class="text-blue-400 hover:text-blue-300 transition-colors">
+                contact@rationalityworkshops.com
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p class="text-gray-400 text-sm">
+            © {{ new Date().getFullYear() }} Rationality Workshop Series. Building better thinking, one workshop at a time.
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -98,9 +156,7 @@ export default {
       navItems: [
         { name: 'Home', path: '/' },
         { name: 'Workshops', path: '/workshops' },
-        { name: 'Community', path: '/community' },
-        { name: 'Resources', path: '/resources' },
-        { name: 'Contact', path: '/contact' }
+        { name: 'Community', path: '/community' }
       ]
     }
   }
