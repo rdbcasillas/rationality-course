@@ -179,7 +179,7 @@
       class="fixed bottom-6 right-6 z-50"
     >
       <button
-        @click="showCheckout = true"
+        @click="openCheckout"
         class="bg-primary-600 hover:bg-primary-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 relative group"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -261,6 +261,19 @@
                 placeholder="your@email.com"
               >
             </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">City *</label>
+              <input
+                v-model="checkoutForm.city"
+                type="text"
+                required
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="Your city"
+              >
+              <p class="text-xs text-gray-500 mt-1">
+                Feel free to change the city so we can understand interest and notify you about future workshops in your area
+              </p>
+            </div>
             <div class="flex gap-4 pt-4">
               <button
                 type="button"
@@ -323,7 +336,8 @@ export default {
       isSubmitting: false,
       checkoutForm: {
         name: '',
-        email: ''
+        email: '',
+        city: ''
       },
       bangaloreOrder: [
         "How Sure Are You? — Thinking in Bets & Bayes",
@@ -627,6 +641,7 @@ export default {
             fields: {
               "Name": this.checkoutForm.name,
               "Email": this.checkoutForm.email,
+              "User City": this.checkoutForm.city,
               "Selected Workshops": this.cart.map(w => w.title).join(', '),
               "Workshop Count": this.cart.length,
               "Primary City": this.getPrimaryCity(),
@@ -660,7 +675,7 @@ export default {
         // Success - clear cart and form
         this.cart = [];
         this.saveCartToStorage();
-        this.checkoutForm = { name: '', email: '' };
+        this.checkoutForm = { name: '', email: '', city: '' };
         this.showCheckout = false;
         this.showSuccessModal = true;
         
@@ -681,6 +696,10 @@ export default {
       return Object.keys(cityCount).reduce((a, b) => 
         cityCount[a] > cityCount[b] ? a : b
       ) || this.selectedCity;
+    },
+    openCheckout() {
+      this.checkoutForm.city = this.selectedCity.charAt(0).toUpperCase() + this.selectedCity.slice(1);
+      this.showCheckout = true;
     },
   },
   mounted() {

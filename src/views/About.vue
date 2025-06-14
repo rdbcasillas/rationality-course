@@ -148,12 +148,10 @@
       </section>
 
       <!-- Call to Action -->
-      <section class="text-center bg-gray-900 text-white rounded-xl p-12">
-        <h2 class="text-3xl font-bold mb-6">Ready to Begin?</h2>
-        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Whether you're seeking clearer thinking, better decision-making, or
-          deeper connections with like-minded people, these workshops offer a
-          path forward.
+      <section class="text-center border-t border-gray-200 pt-12 mt-16">
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto text-justify">
+          Think clearer. Choose better. Connect deeply. That’s the path we’re
+          on.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <router-link
@@ -164,7 +162,7 @@
           </router-link>
           <router-link
             to="/community"
-            class="inline-block bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold px-8 py-3 rounded-lg transition"
+            class="inline-block border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold px-8 py-3 rounded-lg transition"
           >
             Join Community
           </router-link>

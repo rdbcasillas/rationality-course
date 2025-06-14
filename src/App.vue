@@ -6,8 +6,15 @@
         <div class="flex justify-between h-16">
           <!-- Logo/Brand -->
           <div class="flex items-center">
-            <router-link to="/" class="text-xl font-bold text-blue-600">
-              Rationality Workshops
+            <router-link to="/" class="flex items-center space-x-1">
+              <img
+                src="/logo.png"
+                alt="Rationality Workshops Logo"
+                class="h-8 w-8"
+              />
+              <span class="text-xl font-bold text-blue-600">
+                Rationality Workshops
+              </span>
             </router-link>
           </div>
 

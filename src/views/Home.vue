@@ -42,7 +42,7 @@
             <h2
               class="text-2xl md:text-3xl font-bold text-center mb-12 font-display"
             >
-              Skills That Transform How You Think
+              Skills That Shift How You Think & Act
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               <div
@@ -80,9 +80,6 @@
             <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
               Featured Workshops
             </h2>
-            <p class="text-xl text-gray-600">
-              Preview our most popular workshops from the series
-            </p>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -245,7 +242,7 @@ export default {
         {
           title: "Practical Tools",
           description:
-            "Master concrete techniques and build thinking habits you can use daily for clearer choices",
+            "Learn concrete techniques and build thinking habits you can use daily for clearer choices",
           bgColor: "bg-amber-50",
           borderColor: "border-amber-200",
         },
@@ -259,7 +256,7 @@ export default {
         {
           title: "Real-World Application",
           description:
-            "Apply rationality principles to career decisions, relationships, and personal goals",
+            "Apply rationality principles to career decisions, relationships and personal goals",
           bgColor: "bg-purple-50",
           borderColor: "border-purple-200",
         },
