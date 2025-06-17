@@ -173,10 +173,10 @@ export default {
     return {
       mobileMenuOpen: false,
       navItems: [
-        { name: "Home", path: "/" },
         { name: "About", path: "/about" },
         { name: "Workshops", path: "/workshops" },
         { name: "Community", path: "/community" },
+        { name: "Signup", path: "/interest" },
       ],
     };
   },

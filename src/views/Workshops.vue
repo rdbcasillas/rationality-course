@@ -5,11 +5,16 @@
     >
       Workshop Series
     </h1>
-    
+
     <!-- A/B Testing Note -->
     <div class="max-w-3xl mx-auto mb-12 text-center">
-      <p class="text-gray-700 text-base font-semibold bg-blue-50 px-6 py-4 rounded-lg border border-blue-100 leading-relaxed">
-        <span class="text-blue-700">Note:</span> We're experimenting with different workshop sequences in Bangalore and Hyderabad to discover which learning progression is most effective for developing rationality skills. Choose the toggle below based on your city.
+      <p
+        class="text-gray-700 text-base font-semibold bg-blue-50 px-6 py-4 rounded-lg border border-blue-100 leading-relaxed"
+      >
+        <span class="text-blue-700">Note:</span> We're experimenting with
+        different workshop sequences in Bangalore and Hyderabad to discover
+        which learning progression is most effective for developing rationality
+        skills. Choose the toggle below based on your city.
       </p>
     </div>
 
@@ -82,7 +87,7 @@
       >
         <!-- Card Header with Emoji and Number -->
         <div class="p-6 border-b border-gray-100/60">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center justify-between mb-1">
             <span
               class="text-4xl filter drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
               >{{ workshop.emoji }}</span
@@ -91,13 +96,21 @@
               class="text-sm font-medium text-gray-400 bg-gray-50 px-3 py-1 rounded-full"
               >Workshop {{ getWorkshopNumber(workshop) }}/12</span
             >
+            <span
+              :class="[
+                'px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300',
+                workshop.categoryColor,
+              ]"
+            >
+              {{ workshop.category }}
+            </span>
           </div>
           <h3
-            class="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-300"
+            class="text-xl font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors duration-300"
           >
             {{ workshop.title }}
           </h3>
-          <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+          <p class="text-gray-600 text-sm mb-2 leading-relaxed">
             {{ workshop.goal }}
           </p>
         </div>
@@ -126,6 +139,27 @@
             </ul>
           </div>
 
+          <!-- Real-Life Benefits -->
+          <div class="mb-4" v-if="workshop.benefits">
+            <h4
+              class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3"
+            >
+              Skills You Build
+            </h4>
+            <ul class="space-y-2">
+              <li
+                v-for="(benefit, idx) in workshop.benefits"
+                :key="idx"
+                class="text-sm text-gray-600 flex items-start"
+              >
+                <span
+                  class="inline-block w-1.5 h-1.5 mt-1.5 mr-2 bg-green-400 rounded-full"
+                ></span>
+                {{ benefit }}
+              </li>
+            </ul>
+          </div>
+
           <!-- Cart Actions -->
           <div class="mt-auto pt-6 flex items-center justify-between">
             <button
@@ -134,106 +168,142 @@
                 'px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 inline-flex items-center',
                 isInCart(workshop)
                   ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                  : 'bg-primary-600 text-white hover:bg-primary-700'
+                  : 'bg-primary-600 text-white hover:bg-primary-700',
               ]"
             >
-              <svg 
-                class="w-4 h-4 mr-2" 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                class="w-4 h-4 mr-2"
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path 
+                <path
                   v-if="!isInCart(workshop)"
-                  stroke-linecap="round" 
-                  stroke-linejoin="round" 
-                  stroke-width="2" 
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"
                 />
-                <path 
+                <path
                   v-else
-                  stroke-linecap="round" 
-                  stroke-linejoin="round" 
-                  stroke-width="2" 
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              {{ isInCart(workshop) ? 'Added' : 'Add to Cart' }}
+              {{ isInCart(workshop) ? "Added" : "Add to Cart" }}
             </button>
-            <span
-              :class="[
-                'px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300',
-                workshop.categoryColor,
-              ]"
-            >
-              {{ workshop.category }}
-            </span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Floating Cart -->
-    <div 
-      v-if="cart.length > 0"
-      class="fixed bottom-6 right-6 z-50"
-    >
+    <div v-if="cart.length > 0" class="fixed bottom-6 right-6 z-50">
       <button
         @click="openCheckout"
         class="bg-primary-600 hover:bg-primary-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 relative group"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"/>
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"
+          />
         </svg>
-        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold">
+        <span
+          class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold"
+        >
           {{ cart.length }}
         </span>
-        <span class="absolute right-full mr-3 bg-gray-900 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          View Cart ({{ cart.length }} {{ cart.length === 1 ? 'workshop' : 'workshops' }})
+        <span
+          class="absolute right-full mr-3 bg-gray-900 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          View Cart ({{ cart.length }}
+          {{ cart.length === 1 ? "workshop" : "workshops" }})
         </span>
       </button>
     </div>
 
     <!-- Checkout Modal -->
-    <div 
+    <div
       v-if="showCheckout"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       @click.self="showCheckout = false"
     >
-      <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div
+        class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+      >
         <div class="p-6">
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">Your Workshop Selection</h2>
-            <button 
+            <h2 class="text-2xl font-bold text-gray-900">
+              Your Workshop Selection
+            </h2>
+            <button
               @click="showCheckout = false"
               class="text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
 
           <!-- Cart Items -->
           <div class="mb-6">
-            <div 
-              v-for="workshop in cart" 
+            <div
+              v-for="workshop in cart"
               :key="workshop.slug"
               class="flex items-center justify-between p-4 border border-gray-200 rounded-lg mb-3"
             >
               <div class="flex items-center">
                 <span class="text-2xl mr-3">{{ workshop.emoji }}</span>
                 <div>
-                  <h3 class="font-semibold text-gray-900">{{ workshop.title }}</h3>
-                  <p class="text-sm text-gray-600">{{ workshop.city.charAt(0).toUpperCase() + workshop.city.slice(1) }} - Workshop {{ workshop.addedOrder }}/12</p>
+                  <h3 class="font-semibold text-gray-900">
+                    {{ workshop.title }}
+                  </h3>
+                  <p class="text-sm text-gray-600">
+                    {{
+                      workshop.city.charAt(0).toUpperCase() +
+                      workshop.city.slice(1)
+                    }}
+                    - Workshop {{ workshop.addedOrder }}/12
+                  </p>
                 </div>
               </div>
               <button
                 @click="toggleCart(workshop)"
                 class="text-red-500 hover:text-red-700 transition-colors"
               >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
                 </svg>
               </button>
             </div>
@@ -242,36 +312,43 @@
           <!-- Checkout Form -->
           <form @submit.prevent="submitInterest" class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Name *</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Name *</label
+              >
               <input
                 v-model="checkoutForm.name"
                 type="text"
                 required
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 placeholder="Your full name"
-              >
+              />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >Email *</label
+              >
               <input
                 v-model="checkoutForm.email"
                 type="email"
                 required
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 placeholder="your@email.com"
-              >
+              />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">City *</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2"
+                >City *</label
+              >
               <input
                 v-model="checkoutForm.city"
                 type="text"
                 required
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 placeholder="Your city"
-              >
+              />
               <p class="text-xs text-gray-500 mt-1">
-                Feel free to change the city so we can understand interest and notify you about future workshops in your area
+                Feel free to change the city so we can understand interest and
+                notify you about future workshops in your area
               </p>
             </div>
             <div class="flex gap-4 pt-4">
@@ -287,7 +364,7 @@
                 :disabled="isSubmitting"
                 class="flex-1 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors disabled:opacity-50"
               >
-                {{ isSubmitting ? 'Submitting...' : 'Submit Interest' }}
+                {{ isSubmitting ? "Submitting..." : "Submit Interest" }}
               </button>
             </div>
           </form>
@@ -296,21 +373,34 @@
     </div>
 
     <!-- Success Modal -->
-    <div 
+    <div
       v-if="showSuccessModal"
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       @click.self="showSuccessModal = false"
     >
       <div class="bg-white rounded-2xl max-w-md w-full p-8 text-center">
         <div class="mb-6">
-          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          <div
+            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
           <h2 class="text-2xl font-bold text-gray-900 mb-2">Thank You!</h2>
           <p class="text-gray-600 leading-relaxed">
-            We've received your workshop interest and will be in touch soon with next steps.
+            We've received your workshop interest and will be in touch soon with
+            next steps.
           </p>
         </div>
         <button
@@ -335,13 +425,13 @@ export default {
       showSuccessModal: false,
       isSubmitting: false,
       checkoutForm: {
-        name: '',
-        email: '',
-        city: ''
+        name: "",
+        email: "",
+        city: "",
       },
       bangaloreOrder: [
-        "How Sure Are You? — Thinking in Bets & Bayes",
-        "Noticing Confusion", 
+        "Thinking in Bets & Bayes",
+        "Noticing Confusion",
         "Planning Without the Lies",
         "Good Reasons & Rent-Paying Beliefs",
         "Arguing Without Breaking Things",
@@ -351,7 +441,7 @@ export default {
         "From Intention to Habit",
         "Finding the Bottleneck",
         "Thinking Together",
-        "Integration & Reflection"
+        "Integration & Reflection",
       ],
       categoryStyles: {
         Foundations: {
@@ -387,6 +477,10 @@ export default {
             "Heed the hunch",
             "Intellectual honesty",
           ],
+          benefits: [
+            "Paying attention to and naming the confusion",
+            "Turn 'Something's off' into the first clue on a discovery trail",
+          ],
           category: "Foundations",
           categoryColor: "bg-blue-100 text-blue-700",
           slug: "noticing-uncertainty",
@@ -394,13 +488,17 @@ export default {
         {
           number: 2,
           emoji: "📊",
-          title: "How Sure Are You? — Thinking in Bets & Bayes",
+          title: "Thinking in Bets & Bayes",
           subtitle: "Tuning your inner odds-maker",
           goal: "Put numbers on hunches and nudge your thinking when new facts roll in.",
           coreIdeas: [
             "Priors and likelihoods",
             "Honest probability bets",
             "Calibration & fast updating",
+          ],
+          benefits: [
+            "Put a number on hunches so choices feel less like coin-flips",
+            "Dial back over-confidence before it trips you up",
           ],
           category: "Foundations",
           categoryColor: "bg-blue-100 text-blue-700",
@@ -417,6 +515,10 @@ export default {
             "Mental blind spots",
             "Clarity over comfort",
           ],
+          benefits: [
+            "Spot the comfy stories you tell yourself before they steer you wrong",
+            "Trace actions back to the real motives underneath",
+          ],
           category: "Self-Awareness",
           categoryColor: "bg-purple-100 text-purple-700",
           slug: "catching-self-deception",
@@ -431,6 +533,10 @@ export default {
             "Evidence quality",
             "Signal vs. noise",
             "Beliefs that risk being wrong",
+          ],
+          benefits: [
+            "Separate solid evidence from nice-sounding fluff",
+            "Test ideas against reality and drop the ones that flop",
           ],
           category: "Critical Thinking",
           categoryColor: "bg-indigo-100 text-indigo-700",
@@ -447,6 +553,10 @@ export default {
             "Resolving internal tensions",
             "Choosing wisely",
           ],
+          benefits: [
+            "Set goals that fit what you truly value, not what sounds good",
+            "Make peace with trade-offs so you can act without lingering doubt",
+          ],
           category: "Decision Making",
           categoryColor: "bg-green-100 text-green-700",
           slug: "goals-and-tradeoffs",
@@ -461,6 +571,10 @@ export default {
             "Behavior change",
             "Triggers and cues",
             "Consistency over willpower",
+          ],
+          benefits: [
+            "Turn small cues into automatic, stick-around habits",
+            "Automate the small stuff so your mental energy stays fresh for the decisions that truly matter.",
           ],
           category: "Implementation",
           categoryColor: "bg-yellow-100 text-yellow-700",
@@ -477,6 +591,10 @@ export default {
             "Mental rehearsal",
             "Pre-hindsight/Backplanning",
           ],
+          benefits: [
+            "Build plans that survive real-world bumps",
+            "Avoid the trap of over-optimism and unrealistic timelines",
+          ],
           category: "Implementation",
           categoryColor: "bg-yellow-100 text-yellow-700",
           slug: "realistic-planning",
@@ -491,6 +609,10 @@ export default {
             "The Hamming question: “What’s the key obstacle?”",
             "Leverage vs. busywork",
             "Designing experiments to unblock progress",
+          ],
+          benefits: [
+            "Zero-in on the one blocker holding everything back",
+            "Channel effort toward moves with the biggest payoff",
           ],
           category: "Decision Making",
           categoryColor: "bg-green-100 text-green-700",
@@ -507,6 +629,10 @@ export default {
             "Internal disagreement",
             "Self-alignment",
           ],
+          benefits: [
+            "Decode procrastination so you can nudge yourself forward",
+            "Turn inner tug-of-war into a clear, doable next step",
+          ],
           category: "Self-Awareness",
           categoryColor: "bg-purple-100 text-purple-700",
           slug: "internal-alignment",
@@ -521,6 +647,10 @@ export default {
             "Listening generously",
             "Curiosity over correctness",
             "Navigating tension",
+          ],
+          benefits: [
+            "Hold tough conversations without torching trust",
+            "Swap snap rebuttals for questions that actually change minds",
           ],
           category: "Communication",
           categoryColor: "bg-rose-100 text-rose-700",
@@ -537,6 +667,10 @@ export default {
             "Reducing groupthink",
             "Mutual accountability",
           ],
+          benefits: [
+            "Run meetings that surface honest dissent, not polite echoes",
+            "Turn diverse viewpoints into sharper, shared decisions",
+          ],
           category: "Communication",
           categoryColor: "bg-rose-100 text-rose-700",
           slug: "group-rationality",
@@ -548,6 +682,10 @@ export default {
           subtitle: "Weaving it all into life",
           goal: "Look back, harvest what stuck, and design gentle reminders to keep growing.",
           coreIdeas: ["Reflection", "Integration", "Designing for continuity"],
+          benefits: [
+            "Keep using the tools long after the series ends",
+            "Build gentle reminders that nudge steady, lifelong growth",
+          ],
           category: "Integration",
           categoryColor: "bg-teal-100 text-teal-700",
           slug: "integration",
@@ -566,14 +704,14 @@ export default {
     },
     orderedWorkshops() {
       let workshopsToOrder = this.filteredWorkshops;
-      
-      if (this.selectedCity === 'bangalore') {
+
+      if (this.selectedCity === "bangalore") {
         // Create a mapping of titles to their desired order
         const orderMap = {};
         this.bangaloreOrder.forEach((title, index) => {
           orderMap[title] = index;
         });
-        
+
         // Sort workshops based on the Bangalore order
         workshopsToOrder = [...workshopsToOrder].sort((a, b) => {
           const orderA = orderMap[a.title] ?? 999;
@@ -581,7 +719,7 @@ export default {
           return orderA - orderB;
         });
       }
-      
+
       return workshopsToOrder;
     },
     uniqueCategories() {
@@ -605,29 +743,29 @@ export default {
     },
     getWorkshopNumber(workshop) {
       const orderedList = this.orderedWorkshops;
-      return orderedList.findIndex(w => w.slug === workshop.slug) + 1;
+      return orderedList.findIndex((w) => w.slug === workshop.slug) + 1;
     },
     isInCart(workshop) {
-      return this.cart.some(item => item.slug === workshop.slug);
+      return this.cart.some((item) => item.slug === workshop.slug);
     },
     toggleCart(workshop) {
-      const index = this.cart.findIndex(item => item.slug === workshop.slug);
+      const index = this.cart.findIndex((item) => item.slug === workshop.slug);
       if (index >= 0) {
         this.cart.splice(index, 1);
       } else {
         this.cart.push({
           ...workshop,
           addedOrder: this.getWorkshopNumber(workshop),
-          city: this.selectedCity
+          city: this.selectedCity,
         });
       }
       this.saveCartToStorage();
     },
     saveCartToStorage() {
-      localStorage.setItem('workshop-cart', JSON.stringify(this.cart));
+      localStorage.setItem("workshop-cart", JSON.stringify(this.cart));
     },
     loadCartFromStorage() {
-      const saved = localStorage.getItem('workshop-cart');
+      const saved = localStorage.getItem("workshop-cart");
       if (saved) {
         this.cart = JSON.parse(saved);
       }
@@ -637,51 +775,63 @@ export default {
       try {
         // Prepare data for Airtable
         const airtableData = {
-          records: [{
-            fields: {
-              "Name": this.checkoutForm.name,
-              "Email": this.checkoutForm.email,
-              "User City": this.checkoutForm.city,
-              "Selected Workshops": this.cart.map(w => w.title).join(', '),
-              "Workshop Count": this.cart.length,
-              "Primary City": this.getPrimaryCity(),
-              "Submitted At": new Date().toISOString(),
-              "Cart Details": JSON.stringify(this.cart.map(w => ({
-                title: w.title,
-                city: w.city,
-                orderNumber: w.addedOrder
-              })))
-            }
-          }]
+          records: [
+            {
+              fields: {
+                Name: this.checkoutForm.name,
+                Email: this.checkoutForm.email,
+                "User City": this.checkoutForm.city,
+                "Selected Workshops": this.cart.map((w) => w.title).join(", "),
+                "Workshop Count": this.cart.length,
+                "Primary City": this.getPrimaryCity(),
+                "Submitted At": new Date().toISOString(),
+                "Cart Details": JSON.stringify(
+                  this.cart.map((w) => ({
+                    title: w.title,
+                    city: w.city,
+                    orderNumber: w.addedOrder,
+                  }))
+                ),
+              },
+            },
+          ],
         };
 
         // Submit to Airtable
-        const response = await fetch(`https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Submissions`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(airtableData)
-        });
+        const response = await fetch(
+          `https://api.airtable.com/v0/${
+            import.meta.env.VITE_AIRTABLE_BASE_ID
+          }/Submissions`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${
+                import.meta.env.VITE_AIRTABLE_API_TOKEN
+              }`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(airtableData),
+          }
+        );
 
         if (!response.ok) {
           throw new Error(`Airtable API error: ${response.status}`);
         }
 
         const result = await response.json();
-        console.log('Successfully submitted to Airtable:', result);
-        
+        console.log("Successfully submitted to Airtable:", result);
+
         // Success - clear cart and form
         this.cart = [];
         this.saveCartToStorage();
-        this.checkoutForm = { name: '', email: '', city: '' };
+        this.checkoutForm = { name: "", email: "", city: "" };
         this.showCheckout = false;
         this.showSuccessModal = true;
-        
       } catch (error) {
-        console.error('Submission error:', error);
-        alert('Sorry, there was an error submitting your interest. Please try again.');
+        console.error("Submission error:", error);
+        alert(
+          "Sorry, there was an error submitting your interest. Please try again."
+        );
       } finally {
         this.isSubmitting = false;
       }
@@ -692,13 +842,16 @@ export default {
         acc[workshop.city] = (acc[workshop.city] || 0) + 1;
         return acc;
       }, {});
-      
-      return Object.keys(cityCount).reduce((a, b) => 
-        cityCount[a] > cityCount[b] ? a : b
-      ) || this.selectedCity;
+
+      return (
+        Object.keys(cityCount).reduce((a, b) =>
+          cityCount[a] > cityCount[b] ? a : b
+        ) || this.selectedCity
+      );
     },
     openCheckout() {
-      this.checkoutForm.city = this.selectedCity.charAt(0).toUpperCase() + this.selectedCity.slice(1);
+      this.checkoutForm.city =
+        this.selectedCity.charAt(0).toUpperCase() + this.selectedCity.slice(1);
       this.showCheckout = true;
     },
   },
