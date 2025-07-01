@@ -5,10 +5,6 @@
       <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
         Why These Workshops?
       </h1>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-        In a world drowning in misinformation and polarized thinking, we're
-        building spaces for clearer minds and deeper connections.
-      </p>
     </div>
 
     <!-- Main Content -->

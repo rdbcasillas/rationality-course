@@ -3,8 +3,8 @@
     <!-- Main Content -->
     <div class="relative">
       <!-- Hero Section -->
-      <section id="hero" class="min-h-screen flex items-center relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section id="hero" class="min-h-[80vh] flex items-center relative py-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <!-- Hero Section -->
           <div class="text-center max-w-3xl mx-auto">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 font-display">
@@ -37,7 +37,7 @@
 
       <!-- Features Section -->
       <section id="features" class="bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div class="border-t border-gray-200/70 pt-16">
             <h2
               class="text-2xl md:text-3xl font-bold text-center mb-12 font-display"
@@ -61,21 +61,13 @@
                 </div>
               </div>
             </div>
-            <div class="text-center mt-8">
-              <router-link
-                to="/workshops"
-                class="text-blue-600 hover:underline inline-block"
-              >
-                See all 12 workshops →
-              </router-link>
-            </div>
           </div>
         </div>
       </section>
 
       <!-- Workshops Preview Section -->
       <section id="workshops">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
               Featured Workshops
@@ -148,7 +140,7 @@
 
       <!-- Community Preview Section -->
       <section id="community" class="bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div class="text-center max-w-3xl mx-auto mb-12">
             <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
               Join Our Community

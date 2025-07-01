@@ -86,7 +86,7 @@
         class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in border border-gray-100/40 backdrop-blur-sm flex flex-col"
       >
         <!-- Card Header with Emoji and Number -->
-        <div class="p-6 border-b border-gray-100/60">
+        <div class="p-3 border-b border-gray-100/60">
           <div class="flex items-center justify-between mb-1">
             <span
               class="text-4xl filter drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
@@ -110,13 +110,13 @@
           >
             {{ workshop.title }}
           </h3>
-          <p class="text-gray-600 text-sm mb-2 leading-relaxed">
+          <p class="text-gray-600 text-sm mb-1 leading-relaxed">
             {{ workshop.goal }}
           </p>
         </div>
 
         <!-- Card Content -->
-        <div class="p-6 bg-gray-50/50 flex-1 flex flex-col">
+        <div class="p-3 bg-gray-50/50 flex-1 flex flex-col">
           <!-- Core Ideas -->
           <div class="mb-4">
             <h4
@@ -140,7 +140,7 @@
           </div>
 
           <!-- Real-Life Benefits -->
-          <div class="mb-4" v-if="workshop.benefits">
+          <div class="mb-1" v-if="workshop.benefits">
             <h4
               class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3"
             >
@@ -490,7 +490,7 @@ export default {
           emoji: "📊",
           title: "Thinking in Bets & Bayes",
           subtitle: "Tuning your inner odds-maker",
-          goal: "Put numbers on hunches and nudge your thinking when new facts roll in.",
+          goal: "Quantify your intuitions and nudge your thinking when new facts roll in.",
           coreIdeas: [
             "Priors and likelihoods",
             "Honest probability bets",
@@ -498,7 +498,7 @@ export default {
           ],
           benefits: [
             "Put a number on hunches so choices feel less like coin-flips",
-            "Dial back over-confidence before it trips you up",
+            "Check over-confidence before it leads you astray",
           ],
           category: "Foundations",
           categoryColor: "bg-blue-100 text-blue-700",
@@ -604,7 +604,7 @@ export default {
           emoji: "🔑",
           title: "Finding the Bottleneck",
           subtitle: "Hamming questions for leverage",
-          goal: "Zero-in on the single constraint that, if solved, would move the whole project (or life area) forward.",
+          goal: "Identify the one thing holding everything back that, if solved, would move the whole project (or life area) forward.",
           coreIdeas: [
             "The Hamming question: “What’s the key obstacle?”",
             "Leverage vs. busywork",
