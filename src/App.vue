@@ -118,14 +118,6 @@
                 </router-link>
               </li>
               <li>
-                <router-link
-                  to="/community"
-                  class="text-gray-300 hover:text-white text-sm transition-colors"
-                >
-                  Join Community
-                </router-link>
-              </li>
-              <li>
                 <a
                   href="https://www.lesswrong.com"
                   target="_blank"
@@ -133,6 +125,16 @@
                   class="text-gray-300 hover:text-white text-sm transition-colors"
                 >
                   LessWrong
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.clearerthinking.org"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-gray-300 hover:text-white text-sm transition-colors"
+                >
+                  Clearer Thinking
                 </a>
               </li>
             </ul>
@@ -156,6 +158,12 @@
           </div>
         </div>
 
+        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p class="text-gray-400 text-sm">
+            These workshops are made possible through support from the Effective
+            Altruism Infrastructure Fund (EAIF) and Effective Ventures.
+          </p>
+        </div>
         <!-- Bottom Bar -->
         <!-- <div class="border-t border-gray-800 mt-8 pt-8 text-center">
           <p class="text-gray-400 text-sm">
