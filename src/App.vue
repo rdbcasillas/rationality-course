@@ -175,7 +175,7 @@ export default {
       navItems: [
         { name: "About", path: "/about" },
         { name: "Workshops", path: "/workshops" },
-        { name: "Community", path: "/community" },
+        //{ name: "Community", path: "/community" },
         { name: "Signup", path: "/interest" },
       ],
     };

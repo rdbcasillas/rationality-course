@@ -78,6 +78,28 @@
       </div>
     </div>
 
+    <!-- Selection Helpers -->
+    <div class="mb-6 max-w-3xl mx-auto text-center">
+      <p class="text-gray-700 text-sm mb-3">
+        Mark interest on individual workshop (click cart icon), then submit from
+        the floating button.
+      </p>
+      <div class="flex items-center justify-center gap-3">
+        <button
+          @click="addAllVisibleToCart"
+          class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+        >
+          Add all
+        </button>
+        <button
+          @click="removeAllVisibleFromCart"
+          class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+        >
+          Remove all
+        </button>
+      </div>
+    </div>
+
     <!-- Workshop Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <div
@@ -745,6 +767,27 @@ export default {
         this.categoryStyles[category]?.inactive ||
         "bg-gray-100 text-gray-700 hover:bg-gray-200"
       );
+    },
+    addAllVisibleToCart() {
+      const list = this.orderedWorkshops;
+      let added = 0;
+      list.forEach((w) => {
+        if (!this.cart.some((item) => item.slug === w.slug)) {
+          this.cart.push({
+            ...w,
+            addedOrder: this.getWorkshopNumber(w),
+            city: this.selectedCity,
+          });
+          added += 1;
+        }
+      });
+      if (added > 0) this.saveCartToStorage();
+    },
+    removeAllVisibleFromCart() {
+      const slugs = new Set(this.orderedWorkshops.map((w) => w.slug));
+      const originalLen = this.cart.length;
+      this.cart = this.cart.filter((item) => !slugs.has(item.slug));
+      if (this.cart.length !== originalLen) this.saveCartToStorage();
     },
     getWorkshopNumber(workshop) {
       // City-specific canonical order

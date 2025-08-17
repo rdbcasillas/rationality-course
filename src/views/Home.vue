@@ -180,6 +180,48 @@
 
             <div class="bg-gray-50 rounded-2xl p-6">
               <h3 class="text-xl font-semibold mb-3 text-gray-900">
+                Where do the workshops happen?
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                We’re running in <strong>Hyderabad</strong> and
+                <strong>Bangalore</strong>. On the
+                <router-link
+                  to="/workshops"
+                  class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
+                  >workshops page</router-link
+                >
+                you can pick your city and mark the sessions you’re interested
+                in. In Hyderabad, we’ll use a few different venues across the
+                city. In Bangalore, most sessions will be at
+                <a
+                  href="https://enterportal.org"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
+                  >Portal</a
+                >.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+                Can I join online?
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                The first run will be <strong>offline</strong>. If there’s
+                enough interest, we’ll open an online track. To signal interest,
+                go to the
+                <router-link
+                  to="/interest"
+                  class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
+                  >signup form</router-link
+                >
+                and enter <strong>“online”</strong> in the city field.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">
                 What's the cost?
               </h3>
               <p class="text-gray-700 leading-relaxed">
