@@ -2,72 +2,66 @@
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="text-center mb-12">
       <h1 class="text-3xl md:text-4xl font-bold mb-4 font-display">
-        Join Our Community
+        Stay in the Loop
       </h1>
       <p class="text-xl text-gray-600">
-        Connect with fellow rationality practitioners and continue your growth journey together.
+        We’re not opening a chat group yet. Add your name to get updates and be
+        notified when the community launches.
       </p>
     </div>
 
     <div class="bg-white rounded-xl shadow-lg p-8 mb-12">
       <div class="prose prose-lg mx-auto">
-        <h2 class="text-2xl font-semibold mb-4 font-display">Why Join Our WhatsApp Community?</h2>
+        <h2 class="text-2xl font-semibold mb-4 font-display">
+          What you’ll get
+        </h2>
         <ul class="space-y-4">
           <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Practice rationality techniques with supportive peers</span>
+            <span
+              class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"
+            ></span>
+            <span>Early access to workshop announcements and dates</span>
           </li>
           <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Share experiences and learn from others' insights</span>
+            <span
+              class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"
+            ></span>
+            <span>Notes and practice prompts from upcoming sessions</span>
           </li>
           <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Get updates on upcoming workshops and events</span>
-          </li>
-          <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Access exclusive learning resources and discussions</span>
-          </li>
-          <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Participate in community challenges and reflection exercises</span>
+            <span
+              class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"
+            ></span>
+            <span>Occasional experiments and small-group pilots</span>
           </li>
         </ul>
 
-        <h2 class="text-2xl font-semibold mt-8 mb-4 font-display">Community Guidelines</h2>
-        <ul class="space-y-4">
-          <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Be curious and open to new perspectives</span>
-          </li>
-          <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Engage respectfully and assume good faith</span>
-          </li>
-          <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Share experiences, not advice</span>
-          </li>
-          <li class="flex items-start">
-            <span class="inline-block w-2 h-2 mt-3 mr-3 bg-blue-400 rounded-full"></span>
-            <span>Protect privacy and confidentiality</span>
-          </li>
-        </ul>
+        <h2 class="text-2xl font-semibold mt-8 mb-4 font-display">
+          Community timeline
+        </h2>
+        <p class="text-gray-700">
+          We’ll open a WhatsApp/Telegram space once the first workshop cycle is
+          running smoothly. Until then, you can register interest and get
+          updates by email/DM.
+        </p>
       </div>
     </div>
 
     <div class="text-center">
-      <a
-        :href="communityLink"
-        target="_blank"
-        rel="noopener noreferrer"
+      <router-link
+        to="/interest"
         class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105"
       >
-        Join on {{ platform }}
-      </a>
+        Register interest
+      </router-link>
+      <router-link
+        to="/workshops"
+        class="inline-block ml-4 border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white font-semibold px-8 py-3 rounded-lg transition"
+      >
+        Explore workshops
+      </router-link>
       <p class="mt-4 text-sm text-gray-600">
-        By joining, you agree to follow our community guidelines
+        We’ll email/DM only when there’s something useful.
       </p>
     </div>
   </div>
@@ -75,11 +69,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      platform: 'WhatsApp',
-      communityLink: 'https://chat.whatsapp.com/J6tNENeW9O5HvJLOE9jffR'
-    }
-  }
-}
-</script> 
+  name: "Community",
+};
+</script>

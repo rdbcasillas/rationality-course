@@ -164,15 +164,18 @@
           <div class="mt-auto pt-6 flex items-center justify-between">
             <button
               @click="toggleCart(workshop)"
+              :aria-label="
+                isInCart(workshop) ? 'Marked as interested' : 'Mark interest'
+              "
               :class="[
-                'px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 inline-flex items-center',
+                'px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 inline-flex items-center justify-center',
                 isInCart(workshop)
                   ? 'bg-green-100 text-green-700 hover:bg-green-200'
                   : 'bg-primary-600 text-white hover:bg-primary-700',
               ]"
             >
               <svg
-                class="w-4 h-4 mr-2"
+                class="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -192,7 +195,9 @@
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              {{ isInCart(workshop) ? "Added" : "Add to Cart" }}
+              <span class="sr-only">{{
+                isInCart(workshop) ? "Interested" : "Mark interest"
+              }}</span>
             </button>
           </div>
         </div>
@@ -742,8 +747,15 @@ export default {
       );
     },
     getWorkshopNumber(workshop) {
-      const orderedList = this.orderedWorkshops;
-      return orderedList.findIndex((w) => w.slug === workshop.slug) + 1;
+      // City-specific canonical order
+      if (this.selectedCity === "bangalore") {
+        const idx = this.bangaloreOrder.findIndex(
+          (title) => title === workshop.title
+        );
+        if (idx !== -1) return idx + 1;
+      }
+      // Fallback to the workshop's defined number for other cities
+      return workshop.number || 999;
     },
     isInCart(workshop) {
       return this.cart.some((item) => item.slug === workshop.slug);

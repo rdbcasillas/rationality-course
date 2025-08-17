@@ -35,42 +35,12 @@
         </div>
       </section>
 
-      <!-- Features Section -->
-      <section id="features" class="bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div class="border-t border-gray-200/70 pt-16">
-            <h2
-              class="text-2xl md:text-3xl font-bold text-center mb-12 font-display"
-            >
-              Skills That Shift How You Think & Act
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div
-                v-for="(feature, index) in features"
-                :key="index"
-                class="group rounded-xl p-6 shadow-md transition transform duration-200 hover:-translate-y-1 hover:shadow-lg border-l-4"
-                :class="[feature.bgColor, feature.borderColor]"
-              >
-                <div class="mb-4">
-                  <h3 class="text-lg font-semibold mb-3">
-                    {{ feature.title }}
-                  </h3>
-                  <p class="text-gray-700 text-sm leading-relaxed">
-                    {{ feature.description }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Workshops Preview Section -->
       <section id="workshops">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
-              Featured Workshops
+              A quick look at our workshops
             </h2>
           </div>
 
@@ -138,70 +108,111 @@
         </div>
       </section>
 
-      <!-- Community Preview Section -->
-      <section id="community" class="bg-gray-50">
+      <!-- Features Section (moved below workshops) -->
+      <section id="features" class="bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div class="text-center max-w-3xl mx-auto mb-12">
+          <div class="border-t border-gray-200/70 pt-16">
+            <h2
+              class="text-2xl md:text-3xl font-bold text-center mb-12 font-display"
+            >
+              Skills That Shift How You Think & Act
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div
+                v-for="(feature, index) in features"
+                :key="index"
+                class="group rounded-xl p-6 shadow-md transition transform duration-200 hover:-translate-y-1 hover:shadow-lg border-l-4"
+                :class="[feature.bgColor, feature.borderColor]"
+              >
+                <div class="mb-4">
+                  <h3 class="text-lg font-semibold mb-3">
+                    {{ feature.title }}
+                  </h3>
+                  <p class="text-gray-700 text-sm leading-relaxed">
+                    {{ feature.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interest Signup Section -->
+      <section id="interest" class="bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+          <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
+            Want updates and early invites?
+          </h2>
+          <p class="text-gray-600 mb-8">
+            Add your name; we’ll message only when there’s something useful.
+          </p>
+          <router-link
+            to="/interest"
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105"
+          >
+            Sign up for updates
+          </router-link>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div class="text-center mb-12">
             <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
-              Join Our Community
+              FAQs
             </h2>
           </div>
 
-          <div class="max-w-3xl mx-auto">
-            <div class="bg-white rounded-2xl shadow-sm p-8">
-              <h3 class="text-2xl font-semibold mb-6 text-center">
-                Why Join Our WhatsApp Community?
+          <div class="space-y-8">
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+                How often will these workshops happen?
               </h3>
-              <ul class="ml-36 space-y-4 mb-8 max-w-2xl mx-auto">
-                <li class="flex items-start">
-                  <div class="flex-shrink-0">
-                    <span
-                      class="inline-block w-2 h-2 mt-2 bg-blue-400 rounded-full"
-                    ></span>
-                  </div>
-                  <span class="ml-4 text-gray-600"
-                    >Practice rationality techniques with supportive peers</span
-                  >
-                </li>
-                <li class="flex items-start">
-                  <div class="flex-shrink-0">
-                    <span
-                      class="inline-block w-2 h-2 mt-2 bg-blue-400 rounded-full"
-                    ></span>
-                  </div>
-                  <span class="ml-4 text-gray-600"
-                    >Share experiences and learn from others' insights</span
-                  >
-                </li>
-                <li class="flex items-start">
-                  <div class="flex-shrink-0">
-                    <span
-                      class="inline-block w-2 h-2 mt-2 bg-blue-400 rounded-full"
-                    ></span>
-                  </div>
-                  <span class="ml-4 text-gray-600"
-                    >Get updates on upcoming workshops and events</span
-                  >
-                </li>
-                <li class="flex items-start">
-                  <div class="flex-shrink-0">
-                    <span
-                      class="inline-block w-2 h-2 mt-2 bg-blue-400 rounded-full"
-                    ></span>
-                  </div>
-                  <span class="ml-4 text-gray-600"
-                    >Access learning resources and discussions</span
-                  >
-                </li>
-              </ul>
-              <div class="text-center">
-                <router-link
-                  to="/community"
-                  class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105"
-                >
-                  Join Community
-                </router-link>
-              </div>
+              <p class="text-gray-700 leading-relaxed">
+                Workshops are held once every couple of weeks, giving you time
+                to practice and internalize the concepts between sessions. If
+                you have signed up for a particular workshop, you will receive a
+                calendar invite with the date and time.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+                What's the cost?
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                Thanks to support from the Effective Altruism Infrastructure
+                Fund (EAIF) and Effective Ventures, these workshops are free to
+                attend. If you find value in them and would like to support
+                future sessions, voluntary donations are welcome.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+                Can I attend a single workshop or do I have to attend all of
+                them?
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                You can attend individual workshops, but we encourage taking as
+                many as possible for maximum benefit. Our pedagogy uses spaced
+                repetition to recall ideas from previous workshops, so attending
+                multiple sessions reinforces your learning.
+              </p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-6">
+              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+                Will it be lecture style?
+              </h3>
+              <p class="text-gray-700 leading-relaxed">
+                Our workshops are a mix of theory and interactive activities
+                with a heavy focus on the latter. You'll be actively
+                participating, practicing techniques, and working through real
+                scenarios with other participants.
+              </p>
             </div>
           </div>
         </div>

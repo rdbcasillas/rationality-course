@@ -42,7 +42,7 @@
           </h1>
           <p class="text-gray-600 leading-relaxed">
             We're running 12 interactive workshops in Bangalore & Hyderabad.
-            Just tell us you're curious—no commitment yet.
+            Just tell us you're curious, no commitment yet.
           </p>
         </div>
 

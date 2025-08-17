@@ -15,17 +15,17 @@
           The Context We're In
         </h2>
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          Our educational institutions have completely failed at teaching people
-          how to think clearly or behave rationally. Despite decades of
-          schooling, most of us graduate without any systematic training in
-          decision-making, bias recognition, or evidence evaluation. The spaces
-          where we form beliefs and make sense of the world are deteriorating
-          rapidly.
+          Most of our schooling focuses on subjects and facts, but rarely on how
+          to think well. We graduate without a clear toolkit for making
+          decisions, weighing evidence, or spotting our own biases. That gap
+          becomes obvious in today’s environment - constant notifications,
+          endless headlines and quick opinions competing for our attention.
         </p>
         <p class="text-gray-700 leading-relaxed mb-8 text-justify">
-          We're navigating a fractured attention economy, polarized discourse,
-          and increasing social isolation. The tools we need aren't just more
-          information—they're better ways of thinking, feeling, and connecting.
+          What’s missing isn’t another flood of information. It’s the habits and
+          mental skills that help us pause when we’re confused, look deeper
+          instead of rushing past, and connect with people who are also
+          practising deliberate, clear thinking.
         </p>
       </section>
 
@@ -33,20 +33,14 @@
       <section class="mb-16">
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Our Motivation</h2>
         <p class="text-gray-700 leading-relaxed mb-6 text-justify">
-          We're tired of the usual approach: read some books, watch some videos,
-          and hope people magically change how they think and behave. That
-          doesn't work. Real change requires deliberate practice, community
-          support, and systematic reinforcement over time.
+          We’re not doing “read a book and hope it sticks.” Change comes from
+          practice, feedback, and repetition in a supportive group.
         </p>
         <p class="text-gray-700 leading-relaxed mb-6 text-justify">
-          These workshops are our attempt to figure out what actually works for
-          bringing about lasting changes in thinking and behavior. We're
-          building both <strong>epistemic skills</strong> (noticing biases,
-          updating beliefs, understanding evidence, recognizing polarized
-          thinking, maintaining intellectual humility) and
-          <strong>practical rationality techniques</strong> (decision-making,
-          habit formation, creating achievable goals, resolving inner
-          conflicts).
+          This series builds two things: <strong>epistemic skills</strong> —
+          noticing biases, updating beliefs, evaluating evidence, staying humble
+          — and <strong>practical tools</strong> — making decisions, forming
+          habits, setting realistic goals, resolving inner conflicts.
         </p>
 
         <div class="grid md:grid-cols-2 gap-12 mb-8">
@@ -55,15 +49,10 @@
               How We're Approaching This
             </h3>
             <ul class="text-gray-700 space-y-3">
-              <li>
-                90-minute sessions combining discussions with practical
-                exercises
-              </li>
-              <li>Bi-weekly follow-ups for 3 months to track real changes</li>
-              <li>
-                Spaced repetition—concepts revisited in different contexts
-              </li>
-              <li>Community formation around systematic self-improvement</li>
+              <li>90‑minute sessions with discussion + exercises</li>
+              <li>Follow‑ups every two weeks for 3 months</li>
+              <li>Spaced repetition: ideas revisited in new contexts</li>
+              <li>A small community focused on steady improvement</li>
             </ul>
           </div>
 
@@ -72,43 +61,13 @@
               What Makes This Different
             </h3>
             <ul class="text-gray-700 space-y-3">
-              <li>
-                Focus on actual behavior change, not just knowledge transfer
-              </li>
-              <li>Robust measurement beyond basic self-reporting</li>
-              <li>Deliberate community building and accountability</li>
-              <li>Long-term reinforcement, not just weekend workshops</li>
+              <li>Behaviour change over information dumps</li>
+              <li>Light‑weight measurements beyond self‑reports</li>
+              <li>Built‑in accountability</li>
+              <li>Long‑term reinforcement, not a one‑off</li>
             </ul>
           </div>
         </div>
-      </section>
-
-      <!-- Portal Context -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">
-          The Larger Context: Portal
-        </h2>
-        <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          These workshops are part of a larger experiment called
-          <strong
-            ><a
-              href="https://www.enterportal.org"
-              target="_blank"
-              rel="noopener"
-              class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
-              >Portal
-            </a></strong
-          >
-          - a space that emerged from a hunger for deeper human connection,
-          experiential learning, and meaningful collaboration.
-        </p>
-        <p class="text-gray-700 leading-relaxed mb-8 text-justify">
-          Portal brings together curious minds and open hearts from diverse
-          backgrounds, combining intellectual rigor with emotional wisdom. We're
-          exploring how individual growth and collective flourishing can support
-          each other, creating environments where people can learn and explore
-          together rather than consuming standardized education in isolation.
-        </p>
       </section>
 
       <!-- About Vatsal -->
@@ -123,31 +82,31 @@
             class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
             >spent over a decade</a
           >
-          building software and solving genomics puzzles, but discovered that
-          what really lit me up wasn't solving technical problems—it was helping
-          people untangle the complexities of their lives.
+          working in software and genomics—solving technical puzzles, leading
+          projects, and building tools. Over time, I noticed the moments I found
+          most rewarding weren’t the ones where I cracked a tough code problem,
+          but where I could help someone see a situation more clearly or
+          untangle a difficult choice.
         </p>
         <p class="text-gray-700 leading-relaxed mb-4 text-justify">
-          My path began with a deep dive into rationality and critical thinking
-          over a decade ago. As someone fascinated by how we make better
-          decisions, I spent years exploring the tools of clear thinking. But
-          through working with individuals and building communities, I
-          discovered something crucial: addressing our current challenges
-          requires integrating sharp thinking with emotional depth and wisdom.
+          I’ve been exploring rationality and decision‑making for more than ten
+          years, not just as abstract ideas but as practices you can integrate
+          into daily life. Through my own work and with groups I’ve been part
+          of, I’ve learned that sharp thinking alone isn’t enough—it becomes far
+          more effective when paired with emotional awareness and grounded
+          wisdom.
         </p>
         <p class="text-gray-700 leading-relaxed mb-8 text-justify">
-          I believe personal growth and collective flourishing reinforce each
-          other. When we develop better ways of thinking and feeling, we become
-          better equipped to address both our individual challenges and
-          contribute to larger positive change.
+          My focus now is on helping people strengthen both personal clarity and
+          collective well‑being. In my experience, when you develop one, you
+          often strengthen the other.
         </p>
       </section>
 
       <!-- Call to Action -->
       <section class="text-center border-t border-gray-200 pt-12 mt-16">
         <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto text-justify">
-          Think clearer. Choose better. Connect deeply. That’s the path we’re
-          on.
+          Think clearer. Choose better. Connect with care. That’s the path here.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <router-link
