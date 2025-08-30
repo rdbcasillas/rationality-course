@@ -1,106 +1,103 @@
 <template>
-  <div
-    class="min-h-screen bg-sky-50 flex items-center justify-center px-4 sm:px-6 lg:px-8"
-  >
-    <div class="max-w-md w-full">
+  <div class="min-h-screen bg-warm-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-lg w-full mx-auto">
       <!-- Success State -->
-      <div v-if="submitted" class="text-center">
+      <div
+        v-if="submitted"
+        class="bg-sage-50 border-l-4 border-sage-400 p-8 text-center"
+      >
         <div class="mb-6">
-          <div
-            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          <div class="text-3xl mb-4">✓</div>
+          <h2
+            class="text-2xl font-bold text-clay-800 mb-2 font-display lowercase"
           >
-            <svg
-              class="w-8 h-8 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Thanks!</h2>
-          <p class="text-gray-600">We'll send you updates soon.</p>
+            thanks!
+          </h2>
+          <p class="text-clay-600">we will send you updates soon.</p>
         </div>
         <router-link
           to="/workshops"
-          class="text-blue-600 hover:text-blue-700 font-medium"
+          class="text-warm-600 hover:text-warm-700 font-medium lowercase"
         >
-          Explore Workshops →
+          explore workshops →
         </router-link>
       </div>
 
       <!-- Form State -->
-      <div v-else class="bg-white rounded-2xl shadow-lg p-8">
-        <div class="text-center mb-8">
-          <h1 class="text-3xl font-bold text-gray-900 mb-4">
-            Interested in rationality workshops?
+      <div v-else class="bg-warm-100 border-l-4 border-clay-400 p-8">
+        <div class="mb-8">
+          <h1
+            class="text-3xl font-bold text-clay-800 mb-4 font-display lowercase"
+          >
+            interested in rationality workshops?
           </h1>
-          <p class="text-gray-600 leading-relaxed">
-            We're running 12 interactive workshops in Bangalore & Hyderabad.
-            Just tell us you're curious, no commitment yet.
+          <p class="text-clay-600 leading-relaxed">
+            We are running 12 interactive workshops in bangalore & hyderabad.
+            just tell us you're curious, no commitment yet.
           </p>
         </div>
 
         <form @submit.prevent="submitInterest" class="space-y-6">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Name *</label
+            <label
+              class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+              >name *</label
             >
             <input
               v-model="form.name"
               type="text"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Your full name"
+              class="w-full px-4 py-3 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
+              placeholder="your full name"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >Email *</label
+            <label
+              class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+              >email *</label
             >
             <input
               v-model="form.email"
               type="email"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              class="w-full px-4 py-3 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
               placeholder="your@email.com"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2"
-              >City *</label
+            <label
+              class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+              >city *</label
             >
             <input
               v-model="form.city"
               type="text"
               required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Your city"
+              class="w-full px-4 py-3 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
+              placeholder="your city"
             />
+            <p class="text-xs text-clay-500 mt-1">
+              Write 'online' to signal interest in virtual workshops
+            </p>
           </div>
 
           <button
             type="submit"
             :disabled="isSubmitting"
-            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors disabled:opacity-50"
+            class="w-full bg-warm-600 hover:bg-warm-700 text-white font-semibold py-3 px-4 rounded-sm transition-colors disabled:opacity-50 border border-warm-700 lowercase"
           >
-            {{ isSubmitting ? "Submitting..." : "Yes, I'm interested!" }}
+            {{ isSubmitting ? "submitting..." : "yes, i'm interested!" }}
           </button>
         </form>
 
         <div class="mt-8 text-center">
           <router-link
             to="/workshops"
-            class="text-blue-600 hover:text-blue-700 text-sm"
+            class="text-warm-600 hover:text-warm-700 text-sm lowercase"
           >
-            Want to see the workshop details first? →
+            want to see the workshop details first? →
           </router-link>
         </div>
       </div>

@@ -1,7 +1,14 @@
 <template>
-  <div class="min-h-screen bg-sky-50 font-sans text-gray-800">
+  <div class="min-h-screen bg-warm-50 font-sans text-clay-800 relative">
+    <!-- Watermark -->
+    <div class="fixed inset-0 pointer-events-none z-0 opacity-[0.02] flex items-center justify-center">
+      <img src="/logo.png" alt="" class="max-w-[60vh] max-h-[60vh] object-contain" />
+    </div>
+    
+    <!-- Content wrapper -->
+    <div class="relative z-10">
     <!-- Header -->
-    <header class="bg-white shadow-sm">
+    <header class="bg-warm-100 border-b border-clay-200">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
           <!-- Logo/Brand -->
@@ -12,8 +19,8 @@
                 alt="Rationality Workshops Logo"
                 class="h-8 w-8"
               />
-              <span class="text-xl font-bold text-blue-600">
-                Rationality Workshops
+              <span class="text-xl font-bold text-clay-700 font-display">
+                rationality workshops
               </span>
             </router-link>
           </div>
@@ -24,8 +31,8 @@
               v-for="item in navItems"
               :key="item.path"
               :to="item.path"
-              class="text-gray-600 hover:text-blue-600 transition"
-              active-class="text-blue-600"
+              class="text-clay-600 hover:text-warm-600 transition lowercase"
+              active-class="text-warm-600"
             >
               {{ item.name }}
             </router-link>
@@ -35,7 +42,7 @@
           <div class="flex items-center md:hidden">
             <button
               @click="mobileMenuOpen = !mobileMenuOpen"
-              class="text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-md p-2"
+              class="text-clay-600 hover:text-warm-600 focus:outline-none focus:ring-2 focus:ring-warm-300 rounded-md p-2"
             >
               <svg
                 class="h-6 w-6"
@@ -70,8 +77,8 @@
             v-for="item in navItems"
             :key="item.path"
             :to="item.path"
-            class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-50"
-            active-class="text-blue-600 bg-gray-50"
+            class="block px-3 py-2 rounded-md text-base font-medium text-clay-600 hover:text-warm-600 hover:bg-warm-100 lowercase"
+            active-class="text-warm-600 bg-warm-100"
             @click="mobileMenuOpen = false"
           >
             {{ item.name }}
@@ -90,67 +97,33 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
+    <footer class="bg-clay-800 text-warm-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- About Section -->
           <div>
             <h3 class="text-lg font-semibold mb-4">
               Rationality Workshop Series
             </h3>
-            <p class="text-gray-300 text-sm leading-relaxed text-justify">
+            <p class="text-warm-200 text-sm leading-relaxed text-justify">
               A 12-week journey to develop clearer thinking, better
               decision-making, and more effective problem-solving skills through
               practical rationality techniques.
             </p>
           </div>
 
-          <!-- Quick Links -->
-          <div class="ml-12">
-            <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul class="space-y-2">
-              <li>
-                <router-link
-                  to="/workshops"
-                  class="text-gray-300 hover:text-white text-sm transition-colors"
-                >
-                  Workshop Series
-                </router-link>
-              </li>
-              <li>
-                <a
-                  href="https://www.lesswrong.com"
-                  target="_blank"
-                  rel="noopener"
-                  class="text-gray-300 hover:text-white text-sm transition-colors"
-                >
-                  LessWrong
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.clearerthinking.org"
-                  target="_blank"
-                  rel="noopener"
-                  class="text-gray-300 hover:text-white text-sm transition-colors"
-                >
-                  Clearer Thinking
-                </a>
-              </li>
-            </ul>
-          </div>
 
           <!-- Contact -->
           <div>
             <h3 class="text-lg font-semibold mb-4">Get in Touch</h3>
-            <p class="text-gray-300 text-sm mb-3">
+            <p class="text-warm-200 text-sm mb-3">
               Have questions about the workshops or want to learn more?
             </p>
             <div class="text-sm">
-              <p class="text-gray-300">Reach out to:</p>
+              <p class="text-warm-200">Reach out to:</p>
               <a
                 href="mailto:contact@rationalityworkshops.com"
-                class="text-blue-400 hover:text-blue-300 transition-colors"
+                class="text-warm-400 hover:text-warm-300 transition-colors"
               >
                 contact@rationalityworkshops.com
               </a>
@@ -158,8 +131,8 @@
           </div>
         </div>
 
-        <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p class="text-gray-400 text-sm">
+        <div class="border-t border-clay-700 mt-8 pt-8 text-center">
+          <p class="text-warm-300 text-sm">
             These workshops are made possible through support from the Effective
             Altruism Infrastructure Fund (EAIF) and Effective Ventures.
           </p>
@@ -172,6 +145,7 @@
         </div> -->
       </div>
     </footer>
+    </div>
   </div>
 </template>
 

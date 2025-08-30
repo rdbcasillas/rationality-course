@@ -3,95 +3,93 @@
     <!-- Main Content -->
     <div class="relative">
       <!-- Hero Section -->
-      <section id="hero" class="min-h-[80vh] flex items-center relative py-8">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <!-- Hero Section -->
-          <div class="text-center max-w-3xl mx-auto">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 font-display">
-              Rationality Workshop Series
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-600 mb-8">
-              A 12-week journey to sharpen your rationality skills
-            </p>
-
-            <!-- Hero Illustration -->
-            <div class="mb-12">
-              <img
-                src="/hero-illustration.svg"
-                alt="Rationality Workshop Series Illustration"
-                class="w-full max-w-lg mx-auto"
-                loading="lazy"
-              />
+      <section id="hero" class="py-16 md:py-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-3xl mx-auto">
+            <div class="mb-8">
+              <h1
+                class="text-4xl md:text-5xl font-bold mb-6 font-display text-clay-800 leading-tight"
+              >
+                thinking clearer,<br />
+                <span class="text-warm-600 italic">one workshop at a time</span>
+              </h1>
+              <p class="text-xl text-clay-600 mb-8 leading-relaxed">
+                twelve weeks of practice-focused sessions to develop better
+                reasoning, decision-making, and problem-solving habits
+              </p>
             </div>
 
-            <!-- CTA Button -->
-            <router-link
-              to="/workshops"
-              class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105"
-            >
-              Explore Workshops
-            </router-link>
+            <div class="flex flex-col sm:flex-row gap-4 mb-12">
+              <router-link
+                to="/workshops"
+                class="inline-block bg-warm-600 hover:bg-warm-700 text-white font-semibold px-6 py-3 rounded-sm transition border border-warm-700 lowercase"
+              >
+                explore workshops
+              </router-link>
+              <router-link
+                to="/interest"
+                class="inline-block border border-clay-400 text-clay-700 hover:bg-clay-50 font-semibold px-6 py-3 rounded-sm transition lowercase"
+              >
+                sign up for updates
+              </router-link>
+            </div>
+
+            <div class="text-sm text-clay-500 italic font-serif">
+              running in bangalore & hyderabad • supported by Effective Altruism
+              Infrastructure Fund & Effective Ventures
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Workshops Preview Section -->
-      <section id="workshops">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
-              Featured Workshops
+      <section id="workshops" class="bg-clay-50 py-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-12">
+            <h2
+              class="text-2xl md:text-3xl font-bold font-display text-clay-800 mb-4 lowercase"
+            >
+              a sample of what we cover
             </h2>
+            <p class="text-clay-600 leading-relaxed max-w-2xl">
+              each session combines discussion with hands-on practice. topics
+              build on each other but individual sessions are valuable on their
+              own.
+            </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="space-y-8">
             <div
-              v-for="workshop in featuredWorkshops"
+              v-for="(workshop, index) in featuredWorkshops"
               :key="workshop.slug"
-              class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in border border-gray-100/40 backdrop-blur-sm"
+              class="bg-warm-50 border-l-4 border-clay-400 p-6 hover:bg-warm-100 transition-colors duration-200"
             >
-              <!-- Card Header with Emoji and Number -->
-              <div class="p-6 border-b border-gray-100/60">
-                <div class="flex items-center justify-between mb-4">
+              <div class="flex flex-col md:flex-row md:items-start gap-4">
+                <div class="flex-shrink-0">
                   <span
-                    class="text-4xl filter drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
-                    >{{ workshop.emoji }}</span
+                    class="text-xs font-mono text-clay-600 bg-clay-200 px-2 py-1 rounded-sm"
                   >
-                  <span
-                    class="text-sm font-medium text-gray-400 bg-gray-50 px-3 py-1 rounded-full"
-                    >Workshop {{ workshop.number }}/12</span
-                  >
+                    {{ workshop.number }}/12
+                  </span>
                 </div>
-                <h3
-                  class="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-300"
-                >
-                  {{ workshop.title }}
-                </h3>
-                <p class="text-gray-600 text-sm mb-4 leading-relaxed">
-                  {{ workshop.goal }}
-                </p>
-              </div>
-
-              <!-- Card Content -->
-              <div class="p-6 bg-gray-50/50">
-                <div class="mb-4">
-                  <h4
-                    class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3"
+                <div class="flex-1">
+                  <h3
+                    class="text-lg font-semibold text-clay-800 mb-2 font-serif leading-tight"
                   >
-                    Core Ideas
-                  </h4>
-                  <ul class="space-y-2">
-                    <li
-                      v-for="(idea, idx) in workshop.coreIdeas"
-                      :key="idx"
-                      class="text-sm text-gray-600 flex items-start"
+                    {{ workshop.title.toLowerCase() }}
+                  </h3>
+                  <p class="text-clay-600 text-sm mb-3 italic">
+                    {{ workshop.goal }}
+                  </p>
+                  <div class="text-sm text-clay-700">
+                    <span
+                      class="font-mono text-xs text-clay-500 uppercase tracking-wide"
+                      >key ideas:</span
                     >
-                      <span
-                        class="inline-block w-1.5 h-1.5 mt-1.5 mr-2 bg-primary-400 rounded-full"
-                      ></span>
-                      {{ idea }}
-                    </li>
-                  </ul>
+                    {{
+                      workshop.coreIdeas.slice(0, 2).join(" • ").toLowerCase()
+                    }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -100,131 +98,141 @@
           <div class="text-center mt-12">
             <router-link
               to="/workshops"
-              class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105"
+              class="inline-block bg-warm-600 hover:bg-warm-700 text-white font-semibold px-6 py-3 rounded-sm transition border border-warm-700 lowercase"
             >
-              View All Workshops
+              see all workshops
             </router-link>
           </div>
         </div>
       </section>
 
-      <!-- Features Section (moved below workshops) -->
-      <section id="features" class="bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div class="border-t border-gray-200/70 pt-16">
+      <!-- What You'll Develop Section -->
+      <section id="features" class="py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-12">
             <h2
-              class="text-2xl md:text-3xl font-bold text-center mb-12 font-display"
+              class="text-2xl md:text-3xl font-bold font-display text-clay-800 mb-6 lowercase"
             >
-              Skills That Shift How You Think & Act
+              what we work on
             </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div
-                v-for="(feature, index) in features"
-                :key="index"
-                class="group rounded-xl p-6 shadow-md transition transform duration-200 hover:-translate-y-1 hover:shadow-lg border-l-4"
-                :class="[feature.bgColor, feature.borderColor]"
-              >
-                <div class="mb-4">
-                  <h3 class="text-lg font-semibold mb-3">
-                    {{ feature.title }}
-                  </h3>
-                  <p class="text-gray-700 text-sm leading-relaxed">
-                    {{ feature.description }}
-                  </p>
-                </div>
-              </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+            <div
+              v-for="(feature, index) in features"
+              :key="index"
+              class="border-l-2 border-clay-300 pl-4 py-2"
+            >
+              <h3 class="text-base font-semibold font-serif text-clay-800 mb-2">
+                {{ feature.title.toLowerCase() }}
+              </h3>
+              <p class="text-clay-600 text-sm leading-relaxed">
+                {{ feature.description }}
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Interest Signup Section -->
-      <section id="interest" class="bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
-            Want updates and early invites?
+      <section id="interest" class="bg-warm-100 py-16">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2
+            class="text-2xl md:text-3xl font-bold font-display text-clay-800 mb-4 lowercase"
+          >
+            interested? get workshop updates
           </h2>
-          <p class="text-gray-600 mb-8">
-            Add your name; we’ll message only when there’s something useful.
+          <p class="text-clay-600 mb-8 leading-relaxed">
+            We will message only when there's something useful.
           </p>
           <router-link
             to="/interest"
-            class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition transform hover:scale-105"
+            class="inline-block bg-warm-600 hover:bg-warm-700 text-white font-semibold px-6 py-3 rounded-sm transition border border-warm-700 lowercase"
           >
-            Sign up for updates
+            sign up for updates
           </router-link>
         </div>
       </section>
 
       <!-- FAQ Section -->
-      <section id="faq" class="bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold font-display mb-4">
-              FAQs
+      <section id="faq" class="bg-clay-50 py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-12">
+            <h2
+              class="text-2xl md:text-3xl font-bold font-display text-clay-800 mb-4 lowercase"
+            >
+              faqs
             </h2>
           </div>
 
           <div class="space-y-8">
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xl font-semibold mb-3 text-gray-900">
-                How often will these workshops happen?
+            <div class="border-l-4 border-sage-400 bg-sage-50 p-6 mb-6">
+              <h3
+                class="text-lg font-semibold mb-3 text-clay-800 font-serif lowercase"
+              >
+                how often will these workshops happen?
               </h3>
-              <p class="text-gray-700 leading-relaxed">
-                Workshops are held once every couple of weeks, giving you time
-                to practice and internalize the concepts between sessions. If
+              <p class="text-clay-700 leading-relaxed">
+                workshops are held once every couple of weeks, giving you time
+                to practice and internalize the concepts between sessions. if
                 you have signed up for a particular workshop, you will receive a
                 calendar invite with the date and time.
               </p>
             </div>
 
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+            <div class="border-l-4 border-sage-400 bg-sage-50 p-6 mb-6">
+              <h3
+                class="text-lg font-semibold mb-3 text-clay-800 font-serif lowercase"
+              >
                 Where do the workshops happen?
               </h3>
-              <p class="text-gray-700 leading-relaxed">
-                We’re running in <strong>Hyderabad</strong> and
+              <p class="text-clay-700 leading-relaxed">
+                We're running in <strong>Hyderabad</strong> and
                 <strong>Bangalore</strong>. On the
                 <router-link
                   to="/workshops"
-                  class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
+                  class="text-warm-600 hover:text-warm-700 no-underline hover:underline"
                   >workshops page</router-link
                 >
-                you can pick your city and mark the sessions you’re interested
-                in. In Hyderabad, we’ll use a few different venues across the
-                city. In Bangalore, most sessions will be at
+                you can pick your city and mark the sessions you're interested
+                in. We use venues across both cities, including
                 <a
                   href="https://enterportal.org"
                   target="_blank"
                   rel="noopener"
-                  class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
+                  class="text-warm-600 hover:text-warm-700 no-underline hover:underline"
                   >Portal</a
-                >.
+                >
+                in Bangalore and other accessible locations.
               </p>
             </div>
 
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+            <div class="border-l-4 border-sage-400 bg-sage-50 p-6 mb-6">
+              <h3
+                class="text-lg font-semibold mb-3 text-clay-800 font-serif lowercase"
+              >
                 Can I join online?
               </h3>
-              <p class="text-gray-700 leading-relaxed">
+              <p class="text-clay-700 leading-relaxed">
                 The first run will be <strong>offline</strong>. If there’s
                 enough interest, we’ll open an online track. To signal interest,
                 go to the
                 <router-link
                   to="/interest"
-                  class="text-blue-600 hover:text-blue-700 no-underline hover:underline"
+                  class="text-warm-600 hover:text-warm-700 no-underline hover:underline"
                   >signup form</router-link
                 >
                 and enter <strong>“online”</strong> in the city field.
               </p>
             </div>
 
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+            <div class="border-l-4 border-sage-400 bg-sage-50 p-6 mb-6">
+              <h3
+                class="text-lg font-semibold mb-3 text-clay-800 font-serif lowercase"
+              >
                 What's the cost?
               </h3>
-              <p class="text-gray-700 leading-relaxed">
+              <p class="text-clay-700 leading-relaxed">
                 Thanks to support from the Effective Altruism Infrastructure
                 Fund (EAIF) and Effective Ventures, these workshops are free to
                 attend. If you find value in them and would like to support
@@ -232,12 +240,14 @@
               </p>
             </div>
 
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+            <div class="border-l-4 border-sage-400 bg-sage-50 p-6 mb-6">
+              <h3
+                class="text-lg font-semibold mb-3 text-clay-800 font-serif lowercase"
+              >
                 Can I attend a single workshop or do I have to attend all of
                 them?
               </h3>
-              <p class="text-gray-700 leading-relaxed">
+              <p class="text-clay-700 leading-relaxed">
                 You can attend individual workshops, but we encourage taking as
                 many as possible for maximum benefit. Our pedagogy uses spaced
                 repetition to recall ideas from previous workshops, so attending
@@ -245,13 +255,15 @@
               </p>
             </div>
 
-            <div class="bg-gray-50 rounded-2xl p-6">
-              <h3 class="text-xl font-semibold mb-3 text-gray-900">
+            <div class="border-l-4 border-sage-400 bg-sage-50 p-6 mb-6">
+              <h3
+                class="text-lg font-semibold mb-3 text-clay-800 font-serif lowercase"
+              >
                 Will it be lecture style?
               </h3>
-              <p class="text-gray-700 leading-relaxed">
+              <p class="text-clay-700 leading-relaxed">
                 Our workshops are a mix of theory and interactive activities
-                with a heavy focus on the latter. You'll be actively
+                with a heavy focus on the latter. You will be actively
                 participating, practicing techniques, and working through real
                 scenarios with other participants.
               </p>
@@ -322,7 +334,7 @@ export default {
           number: 1,
           emoji: "🤔",
           title: "Noticing Confusion",
-          goal: "Help participants tune into moments of confusion and use them as a signal to explore further.",
+          goal: "Tune into moments of confusion and use them as a signal to explore further.",
           coreIdeas: [
             "Confusion as a clue",
             "Intellectual honesty",
@@ -335,7 +347,7 @@ export default {
           number: 3,
           emoji: "🧠",
           title: "Catching Self-Deception",
-          goal: "Train people to notice when they're protecting a belief because it's comfortable, not because it's true.",
+          goal: "Notice when you're protecting a belief because it's comfortable, not because it's true.",
           coreIdeas: [
             "Emotional investment in beliefs",
             "Mental blind spots",
@@ -348,7 +360,7 @@ export default {
           number: 5,
           emoji: "🎯",
           title: "Untangling Goals & Trade-offs",
-          goal: "Help participants get clarity on what they truly care about and notice when their goals are working against each other.",
+          goal: "Get clarity on what you truly care about and notice when your goals are working against each other.",
           coreIdeas: [
             "Digging below surface goals",
             "Resolving internal tensions",

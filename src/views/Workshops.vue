@@ -1,17 +1,17 @@
 <template>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h1
-      class="text-3xl md:text-4xl font-bold mb-6 text-center font-display bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent"
+      class="text-3xl md:text-4xl font-bold mb-6 text-center font-display text-clay-800 lowercase"
     >
-      Workshop Series
+      workshop series
     </h1>
 
     <!-- A/B Testing Note -->
     <div class="max-w-3xl mx-auto mb-12 text-center">
       <p
-        class="text-gray-700 text-base font-semibold bg-blue-50 px-6 py-4 rounded-lg border border-blue-100 leading-relaxed"
+        class="text-clay-700 text-base font-normal bg-warm-100 px-6 py-4 rounded-sm border-l-4 border-warm-500 leading-relaxed"
       >
-        <span class="text-blue-700">Note:</span> We're experimenting with
+        <span class="text-warm-700">note:</span> we're experimenting with
         different workshop sequences in Bangalore and Hyderabad to discover
         which learning progression is most effective for developing rationality
         skills. Choose the toggle below based on your city.
@@ -21,14 +21,14 @@
     <!-- City Toggle -->
     <div class="mb-8">
       <div class="flex justify-center">
-        <div class="bg-gray-100 p-1 rounded-full">
+        <div class="bg-clay-100 p-1 rounded-sm border border-clay-200">
           <button
             @click="selectedCity = 'bangalore'"
             :class="[
-              'px-6 py-2 rounded-full text-sm font-medium transition-all duration-300',
+              'px-6 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
               selectedCity === 'bangalore'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900',
+                ? 'bg-white text-clay-900 shadow-sm border border-clay-200'
+                : 'text-clay-600 hover:text-clay-900',
             ]"
           >
             Bangalore
@@ -36,10 +36,10 @@
           <button
             @click="selectedCity = 'hyderabad'"
             :class="[
-              'px-6 py-2 rounded-full text-sm font-medium transition-all duration-300',
+              'px-6 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
               selectedCity === 'hyderabad'
-                ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900',
+                ? 'bg-white text-clay-900 shadow-sm border border-clay-200'
+                : 'text-clay-600 hover:text-clay-900',
             ]"
           >
             Hyderabad
@@ -54,10 +54,10 @@
         <button
           @click="activeCategory = ''"
           :class="[
-            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
+            'px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
             !activeCategory
-              ? 'bg-gray-900 text-white shadow-md'
-              : 'bg-gray-100 text-gray-600 hover:bg-gray-200',
+              ? 'bg-clay-800 text-warm-100 border border-clay-700'
+              : 'bg-clay-100 text-clay-600 hover:bg-clay-200 border border-clay-300',
           ]"
         >
           All Workshops
@@ -67,7 +67,7 @@
           :key="category"
           @click="activeCategory = category"
           :class="[
-            'px-4 py-2 rounded-full text-sm font-medium transition-all duration-300',
+            'px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
             activeCategory === category
               ? getCategoryActiveStyle(category)
               : getCategoryInactiveStyle(category),
@@ -80,20 +80,20 @@
 
     <!-- Selection Helpers -->
     <div class="mb-6 max-w-3xl mx-auto text-center">
-      <p class="text-gray-700 text-sm mb-3">
-        Mark interest on individual workshop (click cart icon), then submit from
-        the floating button.
+      <p class="text-clay-700 text-sm mb-3">
+        mark interest on individual workshop, then submit from the floating
+        button.
       </p>
       <div class="flex items-center justify-center gap-3">
         <button
           @click="addAllVisibleToCart"
-          class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+          class="px-4 py-2 rounded-sm border border-clay-300 text-clay-700 hover:bg-clay-50 transition lowercase"
         >
           Add all
         </button>
         <button
           @click="removeAllVisibleFromCart"
-          class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+          class="px-4 py-2 rounded-sm border border-clay-300 text-clay-700 hover:bg-clay-50 transition lowercase"
         >
           Remove all
         </button>
@@ -105,121 +105,98 @@
       <div
         v-for="workshop in orderedWorkshops"
         :key="workshop.slug"
-        class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden animate-fade-in border border-gray-100/40 backdrop-blur-sm flex flex-col"
+        class="group bg-warm-50 border-l-4 border-clay-400 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col"
       >
-        <!-- Card Header with Emoji and Number -->
-        <div class="p-3 border-b border-gray-100/60">
-          <div class="flex items-center justify-between mb-1">
-            <span
-              class="text-4xl filter drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
-              >{{ workshop.emoji }}</span
-            >
-            <span
-              class="text-sm font-medium text-gray-400 bg-gray-50 px-3 py-1 rounded-full"
-              >Workshop {{ getWorkshopNumber(workshop) }}/12</span
-            >
-            <span
-              :class="[
-                'px-3 py-1 rounded-full text-xs font-medium transition-colors duration-300',
-                workshop.categoryColor,
-              ]"
-            >
-              {{ workshop.category }}
-            </span>
+        <!-- Card Header -->
+        <div class="p-4 border-b border-clay-200">
+          <div class="flex items-start justify-between mb-2">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span
+                  class="text-xs font-mono text-clay-600 bg-clay-100 px-2 py-1 rounded-sm"
+                  >{{ getWorkshopNumber(workshop) }}/12</span
+                >
+                <span
+                  :class="[
+                    'px-2 py-1 rounded-sm text-xs font-medium',
+                    workshop.categoryColor,
+                  ]"
+                >
+                  {{ workshop.category.toLowerCase() }}
+                </span>
+              </div>
+              <h3
+                class="text-lg font-semibold text-clay-800 mb-1 font-serif leading-tight"
+              >
+                {{ workshop.title.toLowerCase() }}
+              </h3>
+              <p class="text-clay-600 text-sm leading-relaxed italic">
+                {{ workshop.goal }}
+              </p>
+            </div>
           </div>
-          <h3
-            class="text-xl font-bold text-gray-900 mb-1 group-hover:text-primary-600 transition-colors duration-300"
-          >
-            {{ workshop.title }}
-          </h3>
-          <p class="text-gray-600 text-sm mb-1 leading-relaxed">
-            {{ workshop.goal }}
-          </p>
         </div>
 
         <!-- Card Content -->
-        <div class="p-3 bg-gray-50/50 flex-1 flex flex-col">
+        <div class="p-4 flex-1 flex flex-col">
           <!-- Core Ideas -->
           <div class="mb-4">
             <h4
-              class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3"
+              class="text-sm font-semibold text-clay-600 lowercase mb-3 font-mono"
             >
-              Core Ideas
+              core ideas
             </h4>
-            <ul class="space-y-2">
+            <ul class="space-y-1">
               <li
                 v-for="(idea, idx) in workshop.coreIdeas"
                 :key="idx"
-                class="text-sm text-gray-600 flex items-start animate-slide-up"
-                :style="{ animationDelay: `${idx * 100}ms` }"
+                class="text-sm text-clay-700 flex items-start"
               >
-                <span
-                  class="inline-block w-1.5 h-1.5 mt-1.5 mr-2 bg-primary-400 rounded-full"
-                ></span>
+                <span class="inline-block w-1 h-1 mt-2 mr-3 bg-clay-400"></span>
                 {{ idea }}
               </li>
             </ul>
           </div>
 
           <!-- Real-Life Benefits -->
-          <div class="mb-1" v-if="workshop.benefits">
+          <div class="mb-4" v-if="workshop.benefits">
             <h4
-              class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3"
+              class="text-sm font-semibold text-clay-600 lowercase mb-3 font-mono"
             >
-              Skills You Build
+              skills you build
             </h4>
-            <ul class="space-y-2">
+            <ul class="space-y-1">
               <li
                 v-for="(benefit, idx) in workshop.benefits"
                 :key="idx"
-                class="text-sm text-gray-600 flex items-start"
+                class="text-sm text-clay-700 flex items-start"
               >
-                <span
-                  class="inline-block w-1.5 h-1.5 mt-1.5 mr-2 bg-green-400 rounded-full"
-                ></span>
+                <span class="inline-block w-1 h-1 mt-2 mr-3 bg-sage-400"></span>
                 {{ benefit }}
               </li>
             </ul>
           </div>
 
-          <!-- Cart Actions -->
-          <div class="mt-auto pt-6 flex items-center justify-between">
+          <!-- Interest Toggle -->
+          <div class="mt-auto pt-4 border-t border-clay-200">
             <button
               @click="toggleCart(workshop)"
               :aria-label="
                 isInCart(workshop) ? 'Marked as interested' : 'Mark interest'
               "
               :class="[
-                'px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 inline-flex items-center justify-center',
+                'w-full py-2 px-3 text-sm font-medium transition-all duration-200 border rounded-sm flex items-center justify-center gap-2',
                 isInCart(workshop)
-                  ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                  : 'bg-primary-600 text-white hover:bg-primary-700',
+                  ? 'bg-sage-100 text-sage-800 border-sage-300 hover:bg-sage-200'
+                  : 'bg-warm-100 text-warm-800 border-warm-300 hover:bg-warm-200',
               ]"
             >
-              <svg
-                class="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  v-if="!isInCart(workshop)"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"
-                />
-                <path
-                  v-else
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-              <span class="sr-only">{{
-                isInCart(workshop) ? "Interested" : "Mark interest"
-              }}</span>
+              <span class="text-base">
+                {{ isInCart(workshop) ? "✓" : "+" }}
+              </span>
+              <span class="lowercase">
+                {{ isInCart(workshop) ? "interested" : "mark interest" }}
+              </span>
             </button>
           </div>
         </div>
@@ -230,7 +207,7 @@
     <div v-if="cart.length > 0" class="fixed bottom-6 right-6 z-50">
       <button
         @click="openCheckout"
-        class="bg-primary-600 hover:bg-primary-700 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 relative group"
+        class="bg-warm-600 hover:bg-warm-700 text-white rounded-sm p-3 shadow-md hover:shadow-lg transition-all duration-200 relative group border border-warm-700"
       >
         <svg
           class="w-6 h-6"
@@ -246,14 +223,14 @@
           />
         </svg>
         <span
-          class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold"
+          class="absolute -top-2 -right-2 bg-clay-700 text-warm-100 text-xs rounded-sm h-5 w-5 flex items-center justify-center font-bold font-mono"
         >
           {{ cart.length }}
         </span>
         <span
-          class="absolute right-full mr-3 bg-gray-900 text-white px-2 py-1 rounded text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+          class="absolute right-full mr-3 bg-clay-800 text-warm-100 px-2 py-1 rounded-sm text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 lowercase font-mono"
         >
-          View Cart ({{ cart.length }}
+          view cart ({{ cart.length }}
           {{ cart.length === 1 ? "workshop" : "workshops" }})
         </span>
       </button>
@@ -472,24 +449,32 @@ export default {
       ],
       categoryStyles: {
         Foundations: {
-          active: "bg-blue-600 text-white shadow-md",
-          inactive: "bg-blue-100 text-blue-700 hover:bg-blue-200",
+          active: "bg-clay-600 text-warm-100 border border-clay-700",
+          inactive: "bg-clay-100 text-clay-700 hover:bg-clay-200 border border-clay-300",
         },
         "Self-Awareness": {
-          active: "bg-purple-600 text-white shadow-md",
-          inactive: "bg-purple-100 text-purple-700 hover:bg-purple-200",
+          active: "bg-sage-600 text-warm-100 border border-sage-700",
+          inactive: "bg-sage-100 text-sage-700 hover:bg-sage-200 border border-sage-300",
         },
         "Critical Thinking": {
-          active: "bg-indigo-600 text-white shadow-md",
-          inactive: "bg-indigo-100 text-indigo-700 hover:bg-indigo-200",
+          active: "bg-warm-600 text-white border border-warm-700",
+          inactive: "bg-warm-100 text-warm-700 hover:bg-warm-200 border border-warm-300",
         },
         "Decision Making": {
-          active: "bg-green-600 text-white shadow-md",
-          inactive: "bg-green-100 text-green-700 hover:bg-green-200",
+          active: "bg-clay-700 text-warm-100 border border-clay-800",
+          inactive: "bg-clay-200 text-clay-800 hover:bg-clay-300 border border-clay-400",
         },
         Implementation: {
-          active: "bg-yellow-600 text-white shadow-md",
-          inactive: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200",
+          active: "bg-sage-700 text-warm-100 border border-sage-800",
+          inactive: "bg-sage-200 text-sage-800 hover:bg-sage-300 border border-sage-400",
+        },
+        Communication: {
+          active: "bg-warm-700 text-white border border-warm-800",
+          inactive: "bg-warm-200 text-warm-800 hover:bg-warm-300 border border-warm-400",
+        },
+        Integration: {
+          active: "bg-clay-800 text-warm-100 border border-clay-900",
+          inactive: "bg-clay-300 text-clay-900 hover:bg-clay-400 border border-clay-500",
         },
       },
       workshops: [
@@ -497,8 +482,8 @@ export default {
           number: 1,
           emoji: "🤔",
           title: "Noticing Confusion",
-          subtitle: "Turn confusion into a trailhead",
-          goal: "Learn to catch the “Wait, what?” moments and use them as launch-pads for discovery.",
+          subtitle: "When something feels off",
+          goal: "Learn to catch the 'Wait, what?' moments and use them to dig deeper.",
           coreIdeas: [
             "Confusion as a clue",
             "Heed the hunch",
@@ -509,7 +494,7 @@ export default {
             "Turn 'Something's off' into the first clue on a discovery trail",
           ],
           category: "Foundations",
-          categoryColor: "bg-blue-100 text-blue-700",
+          categoryColor: "bg-clay-100 text-clay-700",
           slug: "noticing-uncertainty",
         },
         {
@@ -517,7 +502,7 @@ export default {
           emoji: "📊",
           title: "Thinking in Bets & Bayes",
           subtitle: "Tuning your inner odds-maker",
-          goal: "Quantify your intuitions and nudge your thinking when new facts roll in.",
+          goal: "Quantify your intuitions and update your thinking when new facts come in.",
           coreIdeas: [
             "Priors and likelihoods",
             "Honest probability bets",
@@ -525,10 +510,10 @@ export default {
           ],
           benefits: [
             "Put a number on hunches so choices feel less like coin-flips",
-            "Check over-confidence before it leads you astray",
+            "Check over-confidence before it trips you up",
           ],
           category: "Foundations",
-          categoryColor: "bg-blue-100 text-blue-700",
+          categoryColor: "bg-clay-100 text-clay-700",
           slug: "bets-and-bayes",
         },
         {
@@ -536,7 +521,7 @@ export default {
           emoji: "🧠",
           title: "Catching Self-Deception",
           subtitle: "Spotting the stories that fool you",
-          goal: "Notice the comfy narratives you protect and peek at what's really underneath.",
+          goal: "Notice the comfortable narratives you protect and look at what's really underneath.",
           coreIdeas: [
             "Emotional investment in beliefs",
             "Mental blind spots",
@@ -547,7 +532,7 @@ export default {
             "Trace actions back to the real motives underneath",
           ],
           category: "Self-Awareness",
-          categoryColor: "bg-purple-100 text-purple-700",
+          categoryColor: "bg-sage-100 text-sage-700",
           slug: "catching-self-deception",
         },
         {
@@ -555,7 +540,7 @@ export default {
           emoji: "🔍",
           title: "Good Reasons & Rent-Paying Beliefs",
           subtitle: "Turning arguments into checkable predictions",
-          goal: "Spot “evidence” that just sounds nice and rewrite claims so they cash out in observable results.",
+          goal: "Spot 'evidence' that just sounds nice and rewrite claims so they turn into something measurable.",
           coreIdeas: [
             "Evidence quality",
             "Signal vs. noise",
@@ -566,7 +551,7 @@ export default {
             "Test ideas against reality and drop the ones that flop",
           ],
           category: "Critical Thinking",
-          categoryColor: "bg-indigo-100 text-indigo-700",
+          categoryColor: "bg-warm-100 text-warm-700",
           slug: "good-reasons",
         },
         {
@@ -585,7 +570,7 @@ export default {
             "Make peace with trade-offs so you can act without lingering doubt",
           ],
           category: "Decision Making",
-          categoryColor: "bg-green-100 text-green-700",
+          categoryColor: "bg-clay-200 text-clay-800",
           slug: "goals-and-tradeoffs",
         },
         {
@@ -604,7 +589,7 @@ export default {
             "Automate the small stuff so your mental energy stays fresh for the decisions that truly matter.",
           ],
           category: "Implementation",
-          categoryColor: "bg-yellow-100 text-yellow-700",
+          categoryColor: "bg-sage-200 text-sage-800",
           slug: "habit-formation",
         },
         {
@@ -612,7 +597,7 @@ export default {
           emoji: "🛠️",
           title: "Planning Without the Lies",
           subtitle: "Planning that survives reality",
-          goal: "Spot rosy assumptions, run a pre-mortem, and build plans with margin for chaos.",
+          goal: "Catch over-optimistic assumptions, run a pre-mortem, and build plans with room for things to go wrong.",
           coreIdeas: [
             "Planning fallacy",
             "Mental rehearsal",
@@ -623,7 +608,7 @@ export default {
             "Avoid the trap of over-optimism and unrealistic timelines",
           ],
           category: "Implementation",
-          categoryColor: "bg-yellow-100 text-yellow-700",
+          categoryColor: "bg-sage-200 text-sage-800",
           slug: "realistic-planning",
         },
         {
@@ -642,7 +627,7 @@ export default {
             "Channel effort toward moves with the biggest payoff",
           ],
           category: "Decision Making",
-          categoryColor: "bg-green-100 text-green-700",
+          categoryColor: "bg-clay-200 text-clay-800",
           slug: "finding-bottleneck",
         },
         {
@@ -650,7 +635,7 @@ export default {
           emoji: "🧩",
           title: "Getting Unstuck",
           subtitle: "Listening to the voices inside",
-          goal: "Give your inner parts airtime, resolve their tug-of-war, and get moving again.",
+          goal: "Listen to your conflicting impulses, sort them out, and move forward.",
           coreIdeas: [
             "Inner clarity",
             "Internal disagreement",
@@ -661,7 +646,7 @@ export default {
             "Turn inner tug-of-war into a clear, doable next step",
           ],
           category: "Self-Awareness",
-          categoryColor: "bg-purple-100 text-purple-700",
+          categoryColor: "bg-sage-100 text-sage-700",
           slug: "internal-alignment",
         },
         {
@@ -669,18 +654,18 @@ export default {
           emoji: "🗣️",
           title: "Arguing Without Breaking Things",
           subtitle: "Disagreeing without the wreckage",
-          goal: "Stay curious under fire and leave conversations smarter than you entered.",
+          goal: "Find the crux of disagreement, stay curious under fire, and leave conversations smarter than you entered.",
           coreIdeas: [
+            "Double-crux",
             "Listening generously",
             "Curiosity over correctness",
-            "Navigating tension",
           ],
           benefits: [
-            "Hold tough conversations without torching trust",
-            "Swap snap rebuttals for questions that actually change minds",
+            "Hold tough conversations without damaging trust",
+            "Replace quick comebacks with questions that actually change minds",
           ],
           category: "Communication",
-          categoryColor: "bg-rose-100 text-rose-700",
+          categoryColor: "bg-warm-200 text-warm-800",
           slug: "productive-disagreement",
         },
         {
@@ -688,7 +673,7 @@ export default {
           emoji: "🌱",
           title: "Thinking Together",
           subtitle: "Thinking better together",
-          goal: "Level-up group brains: surface dissent, share evidence, dodge echo chambers.",
+          goal: "Think better as a group: steelman different views, discover assumptions, avoid confirmation bias.",
           coreIdeas: [
             "Collective intelligence",
             "Reducing groupthink",
@@ -699,7 +684,7 @@ export default {
             "Turn diverse viewpoints into sharper, shared decisions",
           ],
           category: "Communication",
-          categoryColor: "bg-rose-100 text-rose-700",
+          categoryColor: "bg-warm-200 text-warm-800",
           slug: "group-rationality",
         },
         {
@@ -714,7 +699,7 @@ export default {
             "Build gentle reminders that nudge steady, lifelong growth",
           ],
           category: "Integration",
-          categoryColor: "bg-teal-100 text-teal-700",
+          categoryColor: "bg-clay-300 text-clay-900",
           slug: "integration",
         },
       ],
@@ -750,9 +735,18 @@ export default {
       return workshopsToOrder;
     },
     uniqueCategories() {
-      return [
-        ...new Set(this.workshops.map((workshop) => workshop.category)),
-      ].sort();
+      // Preserve order based on first appearance in workshop sequence
+      const seen = new Set();
+      const orderedCategories = [];
+      
+      for (const workshop of this.workshops) {
+        if (!seen.has(workshop.category)) {
+          seen.add(workshop.category);
+          orderedCategories.push(workshop.category);
+        }
+      }
+      
+      return orderedCategories;
     },
   },
   methods: {

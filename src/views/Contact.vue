@@ -79,7 +79,7 @@
         v-if="showSuccess"
         class="mt-6 p-4 bg-green-50 text-green-700 rounded-lg"
       >
-        Thank you for your message! We'll get back to you soon.
+        Thank you for your message! We will get back to you soon.
       </div>
 
       <!-- Error Message -->
@@ -129,7 +129,7 @@ export default {
 
       try {
         // Here you would typically make an API call to your backend
-        // For now, we'll simulate a successful submission
+        // For now, we will simulate a successful submission
         await new Promise(resolve => setTimeout(resolve, 1000))
         
         this.showSuccess = true
