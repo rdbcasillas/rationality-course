@@ -243,16 +243,16 @@
       @click.self="showCheckout = false"
     >
       <div
-        class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        class="bg-warm-50 rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto border-l-4 border-clay-400"
       >
         <div class="p-6">
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">
-              Your Workshop Selection
+            <h2 class="text-2xl font-bold text-clay-800 font-display lowercase">
+              your workshop selection
             </h2>
             <button
               @click="showCheckout = false"
-              class="text-gray-400 hover:text-gray-600 transition-colors"
+              class="text-clay-400 hover:text-clay-600 transition-colors"
             >
               <svg
                 class="w-6 h-6"
@@ -275,26 +275,29 @@
             <div
               v-for="workshop in cart"
               :key="workshop.slug"
-              class="flex items-center justify-between p-4 border border-gray-200 rounded-lg mb-3"
+              class="flex items-center justify-between p-4 border border-clay-200 rounded-sm mb-3 bg-warm-100"
             >
               <div class="flex items-center">
-                <span class="text-2xl mr-3">{{ workshop.emoji }}</span>
+                <div class="mr-3">
+                  <span class="text-xs font-mono text-clay-600 bg-clay-200 px-2 py-1 rounded-sm">
+                    {{ workshop.addedOrder }}/12
+                  </span>
+                </div>
                 <div>
-                  <h3 class="font-semibold text-gray-900">
-                    {{ workshop.title }}
+                  <h3 class="font-semibold text-clay-800 font-serif lowercase">
+                    {{ workshop.title.toLowerCase() }}
                   </h3>
-                  <p class="text-sm text-gray-600">
+                  <p class="text-sm text-clay-600">
                     {{
                       workshop.city.charAt(0).toUpperCase() +
                       workshop.city.slice(1)
                     }}
-                    - Workshop {{ workshop.addedOrder }}/12
                   </p>
                 </div>
               </div>
               <button
                 @click="toggleCart(workshop)"
-                class="text-red-500 hover:text-red-700 transition-colors"
+                class="text-clay-500 hover:text-clay-700 transition-colors"
               >
                 <svg
                   class="w-5 h-5"
@@ -316,59 +319,58 @@
           <!-- Checkout Form -->
           <form @submit.prevent="submitInterest" class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Name *</label
+              <label class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+                >name *</label
               >
               <input
                 v-model="checkoutForm.name"
                 type="text"
                 required
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="Your full name"
+                class="w-full px-4 py-2 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
+                placeholder="your full name"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >Email *</label
+              <label class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+                >email *</label
               >
               <input
                 v-model="checkoutForm.email"
                 type="email"
                 required
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                class="w-full px-4 py-2 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
                 placeholder="your@email.com"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2"
-                >City *</label
+              <label class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+                >city *</label
               >
               <input
                 v-model="checkoutForm.city"
                 type="text"
                 required
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="Your city"
+                class="w-full px-4 py-2 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
+                placeholder="your city"
               />
-              <p class="text-xs text-gray-500 mt-1">
-                Feel free to change the city so we can understand interest and
-                notify you about future workshops in your area
+              <p class="text-xs text-clay-500 mt-1">
+                write 'online' for virtual workshops or any city to signal interest
               </p>
             </div>
             <div class="flex gap-4 pt-4">
               <button
                 type="button"
                 @click="showCheckout = false"
-                class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                class="flex-1 px-6 py-3 border border-clay-300 text-clay-700 rounded-sm hover:bg-clay-50 transition-colors lowercase"
               >
-                Continue Browsing
+                continue browsing
               </button>
               <button
                 type="submit"
                 :disabled="isSubmitting"
-                class="flex-1 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors disabled:opacity-50"
+                class="flex-1 px-6 py-3 bg-warm-600 text-white rounded-sm hover:bg-warm-700 transition-colors disabled:opacity-50 border border-warm-700 lowercase"
               >
-                {{ isSubmitting ? "Submitting..." : "Submit Interest" }}
+                {{ isSubmitting ? "submitting..." : "submit interest" }}
               </button>
             </div>
           </form>
@@ -382,36 +384,20 @@
       class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
       @click.self="showSuccessModal = false"
     >
-      <div class="bg-white rounded-2xl max-w-md w-full p-8 text-center">
+      <div class="bg-warm-50 rounded-sm max-w-md w-full p-8 text-center border-l-4 border-sage-400">
         <div class="mb-6">
-          <div
-            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-          >
-            <svg
-              class="w-8 h-8 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          </div>
-          <h2 class="text-2xl font-bold text-gray-900 mb-2">Thank You!</h2>
-          <p class="text-gray-600 leading-relaxed">
-            We've received your workshop interest and will be in touch soon with
+          <div class="text-3xl mb-4">✓</div>
+          <h2 class="text-2xl font-bold text-clay-800 mb-2 font-display lowercase">thanks!</h2>
+          <p class="text-clay-600 leading-relaxed">
+            we have received your workshop interest and will be in touch soon with
             next steps.
           </p>
         </div>
         <button
           @click="showSuccessModal = false"
-          class="w-full px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium"
+          class="w-full px-6 py-3 bg-warm-600 text-white rounded-sm hover:bg-warm-700 transition-colors font-medium border border-warm-700 lowercase"
         >
-          Continue Exploring
+          continue exploring
         </button>
       </div>
     </div>
