@@ -166,8 +166,8 @@
                 how often will these workshops happen?
               </h3>
               <p class="text-clay-700 leading-relaxed">
-                workshops are held once every couple of weeks, giving you time
-                to practice and internalize the concepts between sessions. if
+                Workshops are held once every couple of weeks, giving you time
+                to practice and internalize the concepts between sessions. If
                 you have signed up for a particular workshop, you will receive a
                 calendar invite with the date and time.
               </p>
@@ -180,7 +180,7 @@
                 Where do the workshops happen?
               </h3>
               <p class="text-clay-700 leading-relaxed">
-                We're running in <strong>Hyderabad</strong> and
+                We're running them in <strong>Hyderabad</strong> and
                 <strong>Bangalore</strong>. On the
                 <router-link
                   to="/workshops"
