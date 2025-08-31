@@ -25,7 +25,7 @@
           What’s missing isn’t another flood of information. It’s the habits and
           mental skills that help us pause when we’re confused, look deeper
           instead of rushing past, and connect with people who are also
-          practising deliberate, clear thinking.
+          practicing deliberate, clear thinking.
         </p>
       </section>
 

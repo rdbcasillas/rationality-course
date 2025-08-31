@@ -79,7 +79,7 @@
               placeholder="your city"
             />
             <p class="text-xs text-clay-500 mt-1">
-              Write 'online' to signal interest in virtual workshops
+              Write 'online' if you can't attend offline ones or prefer virtual workshops
             </p>
           </div>
 

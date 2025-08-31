@@ -65,13 +65,6 @@
               class="bg-warm-50 border-l-4 border-clay-400 p-6 hover:bg-warm-100 transition-colors duration-200"
             >
               <div class="flex flex-col md:flex-row md:items-start gap-4">
-                <div class="flex-shrink-0">
-                  <span
-                    class="text-xs font-mono text-clay-600 bg-clay-200 px-2 py-1 rounded-sm"
-                  >
-                    {{ workshop.number }}/12
-                  </span>
-                </div>
                 <div class="flex-1">
                   <h3
                     class="text-lg font-semibold text-clay-800 mb-2 font-serif leading-tight"
@@ -106,7 +99,7 @@
         </div>
       </section>
 
-      <!-- What You'll Develop Section -->
+      <!-- What You Develop Section -->
       <section id="features" class="py-16">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="mb-12">
@@ -331,17 +324,17 @@ export default {
     featuredWorkshops() {
       return [
         {
-          number: 1,
-          emoji: "🤔",
-          title: "Noticing Confusion",
-          goal: "Tune into moments of confusion and use them as a signal to explore further.",
+          number: 2,
+          emoji: "📊",
+          title: "Thinking in Bets & Bayes",
+          goal: "Quantify your intuitions and update your thinking when new facts come in.",
           coreIdeas: [
-            "Confusion as a clue",
-            "Intellectual honesty",
-            "Noticing vs. ignoring",
+            "Priors and likelihoods",
+            "Honest probability bets",
+            "Calibration & fast updating",
           ],
           category: "Foundations",
-          slug: "noticing-uncertainty",
+          slug: "bets-and-bayes",
         },
         {
           number: 3,
