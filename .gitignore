@@ -29,3 +29,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+# Local dev notes (not for repo)
+CLAUDE.md
+chat-history.md

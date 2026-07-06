@@ -177,8 +177,22 @@
             </ul>
           </div>
 
-          <!-- Interest Toggle -->
-          <div class="mt-auto pt-4 border-t border-clay-200">
+          <!-- Card Actions -->
+          <div class="mt-auto pt-4 border-t border-clay-200 space-y-2">
+            <!-- View Resources Button (conditional) -->
+            <router-link
+              v-if="hasResources(workshop)"
+              :to="{ name: 'WorkshopDetail', params: { slug: workshop.slug } }"
+              class="w-full py-2 px-3 text-sm font-medium transition-all duration-200 border rounded-sm flex items-center justify-center gap-2 bg-clay-100 text-clay-800 border-clay-300 hover:bg-clay-200 lowercase"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>view resources</span>
+            </router-link>
+
+            <!-- Interest Toggle -->
             <button
               @click="toggleCart(workshop)"
               :aria-label="
@@ -405,6 +419,8 @@
 </template>
 
 <script>
+import { workshops } from '@/data/workshops.js';
+
 export default {
   data() {
     return {
@@ -463,232 +479,7 @@ export default {
           inactive: "bg-clay-300 text-clay-900 hover:bg-clay-400 border border-clay-500",
         },
       },
-      workshops: [
-        {
-          number: 1,
-          emoji: "🤔",
-          title: "Noticing Confusion",
-          subtitle: "When something feels off",
-          goal: "Learn to catch the 'Wait, what?' moments and use them to dig deeper.",
-          coreIdeas: [
-            "Confusion as a clue",
-            "Heed the hunch",
-            "Intellectual honesty",
-          ],
-          benefits: [
-            "Paying attention to and naming the confusion",
-            "Turn 'Something's off' into the first clue on a discovery trail",
-          ],
-          category: "Foundations",
-          categoryColor: "bg-clay-100 text-clay-700",
-          slug: "noticing-uncertainty",
-        },
-        {
-          number: 2,
-          emoji: "📊",
-          title: "Thinking in Bets & Bayes",
-          subtitle: "Tuning your inner odds-maker",
-          goal: "Quantify your intuitions and update your thinking when new facts come in.",
-          coreIdeas: [
-            "Priors and likelihoods",
-            "Honest probability bets",
-            "Calibration & fast updating",
-          ],
-          benefits: [
-            "Put a number on hunches so choices feel less like coin-flips",
-            "Check over-confidence before it trips you up",
-          ],
-          category: "Foundations",
-          categoryColor: "bg-clay-100 text-clay-700",
-          slug: "bets-and-bayes",
-        },
-        {
-          number: 3,
-          emoji: "🧠",
-          title: "Catching Self-Deception",
-          subtitle: "Spotting the stories that fool you",
-          goal: "Notice the comfortable narratives you protect and look at what's really underneath.",
-          coreIdeas: [
-            "Emotional investment in beliefs",
-            "Mental blind spots",
-            "Clarity over comfort",
-          ],
-          benefits: [
-            "Spot the comfy stories you tell yourself before they steer you wrong",
-            "Trace actions back to the real motives underneath",
-          ],
-          category: "Self-Awareness",
-          categoryColor: "bg-sage-100 text-sage-700",
-          slug: "catching-self-deception",
-        },
-        {
-          number: 4,
-          emoji: "🔍",
-          title: "Good Reasons & Rent-Paying Beliefs",
-          subtitle: "Turning arguments into checkable predictions",
-          goal: "Spot 'evidence' that just sounds nice and rewrite claims so they turn into something measurable.",
-          coreIdeas: [
-            "Evidence quality",
-            "Signal vs. noise",
-            "Beliefs that risk being wrong",
-          ],
-          benefits: [
-            "Separate solid evidence from nice-sounding fluff",
-            "Test ideas against reality and drop the ones that flop",
-          ],
-          category: "Critical Thinking",
-          categoryColor: "bg-warm-100 text-warm-700",
-          slug: "good-reasons",
-        },
-        {
-          number: 5,
-          emoji: "🎯",
-          title: "Untangling Goals & Trade-offs",
-          subtitle: "Figuring out what you actually want",
-          goal: "Unpack clashing goals and pick the trade-offs you can live with.",
-          coreIdeas: [
-            "Digging below surface goals",
-            "Resolving internal tensions",
-            "Choosing wisely",
-          ],
-          benefits: [
-            "Set goals that fit what you truly value, not what sounds good",
-            "Make peace with trade-offs so you can act without lingering doubt",
-          ],
-          category: "Decision Making",
-          categoryColor: "bg-clay-200 text-clay-800",
-          slug: "goals-and-tradeoffs",
-        },
-        {
-          number: 6,
-          emoji: "🔁",
-          title: "From Intention to Habit",
-          subtitle: "Making tiny habits that stick",
-          goal: "Swap vague intentions for cue-based micro-actions that run on autopilot.",
-          coreIdeas: [
-            "Behavior change",
-            "Triggers and cues",
-            "Consistency over willpower",
-          ],
-          benefits: [
-            "Turn small cues into automatic, stick-around habits",
-            "Automate the small stuff so your mental energy stays fresh for the decisions that truly matter.",
-          ],
-          category: "Implementation",
-          categoryColor: "bg-sage-200 text-sage-800",
-          slug: "habit-formation",
-        },
-        {
-          number: 7,
-          emoji: "🛠️",
-          title: "Planning Without the Lies",
-          subtitle: "Planning that survives reality",
-          goal: "Catch over-optimistic assumptions, run a pre-mortem, and build plans with room for things to go wrong.",
-          coreIdeas: [
-            "Planning fallacy",
-            "Mental rehearsal",
-            "Pre-hindsight/Backplanning",
-          ],
-          benefits: [
-            "Build plans that survive real-world bumps",
-            "Avoid the trap of over-optimism and unrealistic timelines",
-          ],
-          category: "Implementation",
-          categoryColor: "bg-sage-200 text-sage-800",
-          slug: "realistic-planning",
-        },
-        {
-          number: 8,
-          emoji: "🔑",
-          title: "Finding the Bottleneck",
-          subtitle: "Hamming questions for leverage",
-          goal: "Identify the one thing holding everything back that, if solved, would move the whole project (or life area) forward.",
-          coreIdeas: [
-            "The Hamming question: “What’s the key obstacle?”",
-            "Leverage vs. busywork",
-            "Designing experiments to unblock progress",
-          ],
-          benefits: [
-            "Zero-in on the one blocker holding everything back",
-            "Channel effort toward moves with the biggest payoff",
-          ],
-          category: "Decision Making",
-          categoryColor: "bg-clay-200 text-clay-800",
-          slug: "finding-bottleneck",
-        },
-        {
-          number: 9,
-          emoji: "🧩",
-          title: "Getting Unstuck",
-          subtitle: "Listening to the voices inside",
-          goal: "Listen to your conflicting impulses, sort them out, and move forward.",
-          coreIdeas: [
-            "Inner clarity",
-            "Internal disagreement",
-            "Self-alignment",
-          ],
-          benefits: [
-            "Decode procrastination so you can nudge yourself forward",
-            "Turn inner tug-of-war into a clear, doable next step",
-          ],
-          category: "Self-Awareness",
-          categoryColor: "bg-sage-100 text-sage-700",
-          slug: "internal-alignment",
-        },
-        {
-          number: 10,
-          emoji: "🗣️",
-          title: "Arguing Without Breaking Things",
-          subtitle: "Disagreeing without the wreckage",
-          goal: "Find the crux of disagreement, stay curious under fire, and leave conversations smarter than you entered.",
-          coreIdeas: [
-            "Double-crux",
-            "Listening generously",
-            "Curiosity over correctness",
-          ],
-          benefits: [
-            "Hold tough conversations without damaging trust",
-            "Replace quick comebacks with questions that actually change minds",
-          ],
-          category: "Communication",
-          categoryColor: "bg-warm-200 text-warm-800",
-          slug: "productive-disagreement",
-        },
-        {
-          number: 11,
-          emoji: "🌱",
-          title: "Thinking Together",
-          subtitle: "Thinking better together",
-          goal: "Think better as a group: steelman different views, discover assumptions, avoid confirmation bias.",
-          coreIdeas: [
-            "Collective intelligence",
-            "Reducing groupthink",
-            "Mutual accountability",
-          ],
-          benefits: [
-            "Run meetings that surface honest dissent, not polite echoes",
-            "Turn diverse viewpoints into sharper, shared decisions",
-          ],
-          category: "Communication",
-          categoryColor: "bg-warm-200 text-warm-800",
-          slug: "group-rationality",
-        },
-        {
-          number: 12,
-          emoji: "🔄",
-          title: "Integration & Reflection",
-          subtitle: "Weaving it all into life",
-          goal: "Look back, harvest what stuck, and design gentle reminders to keep growing.",
-          coreIdeas: ["Reflection", "Integration", "Designing for continuity"],
-          benefits: [
-            "Keep using the tools long after the series ends",
-            "Build gentle reminders that nudge steady, lifelong growth",
-          ],
-          category: "Integration",
-          categoryColor: "bg-clay-300 text-clay-900",
-          slug: "integration",
-        },
-      ],
+      workshops,
     };
   },
   computed: {
@@ -747,6 +538,11 @@ export default {
         this.categoryStyles[category]?.inactive ||
         "bg-gray-100 text-gray-700 hover:bg-gray-200"
       );
+    },
+    hasResources(workshop) {
+      const hasSessions = !!(workshop.sessions && workshop.sessions.length);
+      const r = workshop.resources || {};
+      return hasSessions || !!(r.lumaEvent || r.youtube || r.slides);
     },
     addAllVisibleToCart() {
       const list = this.orderedWorkshops;
