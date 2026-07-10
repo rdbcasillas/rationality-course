@@ -21,7 +21,7 @@
         class="ghost-num absolute -top-8 right-0 text-[10rem] md:text-[16rem] opacity-60 pointer-events-none"
         aria-hidden="true"
       >
-        {{ String(workshop.number).padStart(2, "0") }}
+        {{ String(workshopPosition).padStart(2, "0") }}
       </div>
 
       <!-- event poster, clipped into the journal -->
@@ -50,7 +50,7 @@
       <!-- Header -->
       <header :class="['relative mb-14', workshop.image ? 'md:pr-80' : 'max-w-2xl']">
         <p class="font-mono text-xs tracking-[0.25em] text-clay-500 mb-5 lowercase">
-          workshop {{ workshop.number }} of 12 · {{ workshop.category.toLowerCase() }}
+          workshop {{ workshopPosition }} of 12 · {{ workshop.category.toLowerCase() }}
         </p>
 
         <h1 class="text-4xl md:text-6xl font-display font-medium text-ink leading-[1.05] tracking-tight mb-6 lowercase">
@@ -218,6 +218,10 @@ export default {
     };
   },
   computed: {
+    workshopPosition() {
+      if (!this.workshop) return 0;
+      return orderedWorkshops.findIndex((w) => w.slug === this.workshop.slug) + 1;
+    },
     prevWorkshop() {
       if (!this.workshop) return null;
       const idx = orderedWorkshops.findIndex((w) => w.slug === this.workshop.slug);
