@@ -15,12 +15,22 @@
           </h2>
           <p class="text-clay-600">we will send you updates soon.</p>
         </div>
-        <router-link
-          to="/workshops"
-          class="text-warm-600 hover:text-warm-700 font-medium lowercase"
+        <a
+          href="https://chat.whatsapp.com/IfjRiT6AtNhKmREmEJOWpJ"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-ink hover:bg-ink-700 text-warm-50 font-medium px-6 py-3 transition lowercase mb-4"
         >
-          explore workshops →
-        </router-link>
+          join the whatsapp community ↗
+        </a>
+        <div>
+          <router-link
+            to="/workshops"
+            class="text-warm-600 hover:text-warm-700 font-medium lowercase"
+          >
+            explore workshops →
+          </router-link>
+        </div>
       </div>
 
       <!-- Form State -->
@@ -92,7 +102,21 @@
           </button>
         </form>
 
-        <div class="mt-8 text-center">
+        <div class="mt-8 pt-6 border-t border-dotted border-clay-400 text-center">
+          <p class="font-mono text-xs text-clay-500 lowercase mb-2">
+            prefer whatsapp? join the community for updates &amp; discussion
+          </p>
+          <a
+            href="https://chat.whatsapp.com/IfjRiT6AtNhKmREmEJOWpJ"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-accent hover:text-accent-700 font-medium text-sm lowercase"
+          >
+            join the whatsapp community ↗
+          </a>
+        </div>
+
+        <div class="mt-6 text-center">
           <router-link
             to="/workshops"
             class="text-warm-600 hover:text-warm-700 text-sm lowercase"

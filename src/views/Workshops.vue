@@ -1,227 +1,106 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1
-      class="text-3xl md:text-4xl font-bold mb-6 text-center font-display text-clay-800 lowercase"
-    >
-      workshop series
-    </h1>
-
-    <!-- A/B Testing Note -->
-    <div class="max-w-3xl mx-auto mb-12 text-center">
-      <p
-        class="text-clay-700 text-base font-normal bg-warm-100 px-6 py-4 rounded-sm border-l-4 border-warm-500 leading-relaxed"
-      >
-        <span class="text-warm-700">note:</span> we're experimenting with
-        different workshop sequences in Bangalore and Hyderabad to discover
-        which learning progression is most effective for developing rationality
-        skills. Choose the toggle below based on your city.
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+    <!-- Header -->
+    <div class="mb-14 relative">
+      <BlinkingLogo
+        aria-hidden="true"
+        class="absolute top-0 right-0 w-40 md:w-64 opacity-30 pointer-events-none select-none hidden sm:block"
+      />
+      <p class="font-mono text-xs tracking-[0.25em] text-clay-500 mb-4 lowercase">
+        the curriculum
       </p>
-    </div>
-
-    <!-- City Toggle -->
-    <div class="mb-8">
-      <div class="flex justify-center">
-        <div class="bg-clay-100 p-1 rounded-sm border border-clay-200">
-          <button
-            @click="selectedCity = 'bangalore'"
-            :class="[
-              'px-6 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
-              selectedCity === 'bangalore'
-                ? 'bg-white text-clay-900 shadow-sm border border-clay-200'
-                : 'text-clay-600 hover:text-clay-900',
-            ]"
-          >
-            Bangalore
-          </button>
-          <button
-            @click="selectedCity = 'hyderabad'"
-            :class="[
-              'px-6 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
-              selectedCity === 'hyderabad'
-                ? 'bg-white text-clay-900 shadow-sm border border-clay-200'
-                : 'text-clay-600 hover:text-clay-900',
-            ]"
-          >
-            Hyderabad
-          </button>
-        </div>
-      </div>
+      <h1 class="text-4xl md:text-6xl font-display font-medium text-ink lowercase mb-5">
+        twelve workshops
+      </h1>
+      <p class="text-lg text-clay-600 max-w-xl leading-relaxed">
+        each session pairs a big idea with hands-on practice. attend any — mark
+        the ones you're interested in and we'll write to you when they're
+        scheduled.
+      </p>
+      <p class="font-hand text-2xl text-accent -rotate-1 inline-block mt-3">
+        they build on each other, but each stands alone
+      </p>
     </div>
 
     <!-- Category Filters -->
-    <div class="mb-8">
-      <div class="flex flex-wrap gap-2 justify-center">
-        <button
-          @click="activeCategory = ''"
-          :class="[
-            'px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
-            !activeCategory
-              ? 'bg-clay-800 text-warm-100 border border-clay-700'
-              : 'bg-clay-100 text-clay-600 hover:bg-clay-200 border border-clay-300',
-          ]"
-        >
-          All Workshops
-        </button>
-        <button
-          v-for="category in uniqueCategories"
-          :key="category"
-          @click="activeCategory = category"
-          :class="[
-            'px-4 py-2 rounded-sm text-sm font-medium transition-all duration-300 lowercase',
-            activeCategory === category
-              ? getCategoryActiveStyle(category)
-              : getCategoryInactiveStyle(category),
-          ]"
-        >
-          {{ category }}
-        </button>
-      </div>
-    </div>
-
-    <!-- Selection Helpers -->
-    <div class="mb-6 max-w-3xl mx-auto text-center">
-      <p class="text-clay-700 text-sm mb-3">
-        mark interest on individual workshop, then submit from the floating
-        button.
-      </p>
-      <div class="flex items-center justify-center gap-3">
-        <button
-          @click="addAllVisibleToCart"
-          class="px-4 py-2 rounded-sm border border-clay-300 text-clay-700 hover:bg-clay-50 transition lowercase"
-        >
-          Add all
-        </button>
-        <button
-          @click="removeAllVisibleFromCart"
-          class="px-4 py-2 rounded-sm border border-clay-300 text-clay-700 hover:bg-clay-50 transition lowercase"
-        >
-          Remove all
-        </button>
-      </div>
+    <div class="mb-10 flex flex-wrap items-baseline gap-x-6 gap-y-2 border-b border-clay-300 pb-4">
+      <button
+        @click="activeCategory = ''"
+        :class="[
+          'font-mono text-sm lowercase transition',
+          !activeCategory ? 'text-accent squiggle' : 'text-clay-500 hover:text-ink',
+        ]"
+      >
+        all <span class="text-clay-400">({{ workshops.length }})</span>
+      </button>
+      <button
+        v-for="category in uniqueCategories"
+        :key="category"
+        @click="activeCategory = activeCategory === category ? '' : category"
+        :class="[
+          'font-mono text-sm lowercase transition',
+          activeCategory === category ? 'text-accent squiggle' : 'text-clay-500 hover:text-ink',
+        ]"
+      >
+        {{ category.toLowerCase() }}
+      </button>
     </div>
 
     <!-- Workshop Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div
-        v-for="workshop in orderedWorkshops"
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <router-link
+        v-for="workshop in filteredWorkshops"
         :key="workshop.slug"
-        class="group bg-warm-50 border-l-4 border-clay-400 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col"
+        :to="{ name: 'WorkshopDetail', params: { slug: workshop.slug } }"
+        class="group relative bg-warm-50 border border-clay-300 hover:border-ink transition-colors duration-300 p-6 flex flex-col overflow-hidden"
       >
-        <!-- Card Header -->
-        <div class="p-4 border-b border-clay-200">
-          <div class="flex items-start justify-between mb-2">
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-2">
-                <span
-                  class="text-xs font-mono text-clay-600 bg-clay-100 px-2 py-1 rounded-sm"
-                  >{{ getWorkshopNumber(workshop) }}/12</span
-                >
-                <span
-                  :class="[
-                    'px-2 py-1 rounded-sm text-xs font-medium',
-                    workshop.categoryColor,
-                  ]"
-                >
-                  {{ workshop.category.toLowerCase() }}
-                </span>
-              </div>
-              <h3
-                class="text-lg font-semibold text-clay-800 mb-1 font-serif leading-tight"
-              >
-                {{ workshop.title.toLowerCase() }}
-              </h3>
-              <p class="text-clay-600 text-sm leading-relaxed italic">
-                {{ workshop.goal }}
-              </p>
-            </div>
-          </div>
+        <p class="font-mono text-[11px] tracking-[0.2em] text-clay-500 mb-4 lowercase">
+          {{ workshop.category.toLowerCase() }}
+        </p>
+
+        <h3 class="font-display text-2xl text-ink leading-snug mb-1 lowercase group-hover:text-accent transition-colors">
+          {{ workshop.title.toLowerCase() }}
+        </h3>
+        <p class="text-sm italic text-clay-500 mb-4 lowercase">
+          {{ workshop.subtitle.toLowerCase() }}
+        </p>
+
+        <p class="text-sm text-clay-600 leading-relaxed mb-6">
+          {{ workshop.goal }}
+        </p>
+
+        <!-- Card footer -->
+        <div class="mt-auto pt-4 border-t border-dotted border-clay-400 flex items-center justify-between gap-3">
+          <span class="font-mono text-xs text-clay-500 lowercase">
+            <template v-if="workshop.sessions && workshop.sessions.length">
+              <span class="inline-block w-1.5 h-1.5 rounded-full bg-sage-500 mr-1.5 align-middle"></span>held ×{{ workshop.sessions.length }}
+            </template>
+            <template v-else>
+              <span class="inline-block w-1.5 h-1.5 rounded-full border border-clay-400 mr-1.5 align-middle"></span>upcoming
+            </template>
+          </span>
+
+          <button
+            @click.prevent.stop="toggleCart(workshop)"
+            :aria-label="isInCart(workshop) ? 'Marked as interested' : 'Mark interest'"
+            :class="[
+              'font-mono text-xs px-3 py-1.5 border transition lowercase',
+              isInCart(workshop)
+                ? 'bg-sage-100 text-sage-800 border-sage-400'
+                : 'text-clay-600 border-clay-300 hover:border-accent hover:text-accent',
+            ]"
+          >
+            {{ isInCart(workshop) ? "✓ interested" : "+ interested" }}
+          </button>
         </div>
-
-        <!-- Card Content -->
-        <div class="p-4 flex-1 flex flex-col">
-          <!-- Core Ideas -->
-          <div class="mb-4">
-            <h4
-              class="text-sm font-semibold text-clay-600 lowercase mb-3 font-mono"
-            >
-              core ideas
-            </h4>
-            <ul class="space-y-1">
-              <li
-                v-for="(idea, idx) in workshop.coreIdeas"
-                :key="idx"
-                class="text-sm text-clay-700 flex items-start"
-              >
-                <span class="inline-block w-1 h-1 mt-2 mr-3 bg-clay-400"></span>
-                {{ idea }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Real-Life Benefits -->
-          <div class="mb-4" v-if="workshop.benefits">
-            <h4
-              class="text-sm font-semibold text-clay-600 lowercase mb-3 font-mono"
-            >
-              skills you build
-            </h4>
-            <ul class="space-y-1">
-              <li
-                v-for="(benefit, idx) in workshop.benefits"
-                :key="idx"
-                class="text-sm text-clay-700 flex items-start"
-              >
-                <span class="inline-block w-1 h-1 mt-2 mr-3 bg-sage-400"></span>
-                {{ benefit }}
-              </li>
-            </ul>
-          </div>
-
-          <!-- Card Actions -->
-          <div class="mt-auto pt-4 border-t border-clay-200 space-y-2">
-            <!-- View Resources Button (conditional) -->
-            <router-link
-              v-if="hasResources(workshop)"
-              :to="{ name: 'WorkshopDetail', params: { slug: workshop.slug } }"
-              class="w-full py-2 px-3 text-sm font-medium transition-all duration-200 border rounded-sm flex items-center justify-center gap-2 bg-clay-100 text-clay-800 border-clay-300 hover:bg-clay-200 lowercase"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-              <span>view resources</span>
-            </router-link>
-
-            <!-- Interest Toggle -->
-            <button
-              @click="toggleCart(workshop)"
-              :aria-label="
-                isInCart(workshop) ? 'Marked as interested' : 'Mark interest'
-              "
-              :class="[
-                'w-full py-2 px-3 text-sm font-medium transition-all duration-200 border rounded-sm flex items-center justify-center gap-2',
-                isInCart(workshop)
-                  ? 'bg-sage-100 text-sage-800 border-sage-300 hover:bg-sage-200'
-                  : 'bg-warm-100 text-warm-800 border-warm-300 hover:bg-warm-200',
-              ]"
-            >
-              <span class="text-base">
-                {{ isInCart(workshop) ? "✓" : "+" }}
-              </span>
-              <span class="lowercase">
-                {{ isInCart(workshop) ? "interested" : "mark interest" }}
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
+      </router-link>
     </div>
 
     <!-- Floating Cart -->
     <div v-if="cart.length > 0" class="fixed bottom-6 right-6 z-50">
       <button
         @click="openCheckout"
-        class="bg-warm-600 hover:bg-warm-700 text-white rounded-sm p-3 shadow-md hover:shadow-lg transition-all duration-200 relative group border border-warm-700"
+        class="bg-ink hover:bg-ink-700 text-warm-100 p-3.5 shadow-lg hover:shadow-xl transition-all duration-200 relative group"
       >
         <svg
           class="w-6 h-6"
@@ -233,19 +112,18 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"
+            d="M4 4v16h12l4-4V4H4z M16 20v-4h4"
           />
         </svg>
         <span
-          class="absolute -top-2 -right-2 bg-clay-700 text-warm-100 text-xs rounded-sm h-5 w-5 flex items-center justify-center font-bold font-mono"
+          class="absolute -top-2 -right-2 bg-accent text-warm-50 text-xs h-5 w-5 flex items-center justify-center font-bold font-mono"
         >
           {{ cart.length }}
         </span>
         <span
-          class="absolute right-full mr-3 bg-clay-800 text-warm-100 px-2 py-1 rounded-sm text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 lowercase font-mono"
+          class="absolute right-full mr-3 bg-ink-900 text-warm-100 px-2 py-1 text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 lowercase font-mono"
         >
-          view cart ({{ cart.length }}
-          {{ cart.length === 1 ? "workshop" : "workshops" }})
+          submit interest ({{ cart.length }})
         </span>
       </button>
     </div>
@@ -253,20 +131,21 @@
     <!-- Checkout Modal -->
     <div
       v-if="showCheckout"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      class="fixed inset-0 bg-ink-900 bg-opacity-60 flex items-center justify-center z-50 p-4"
       @click.self="showCheckout = false"
     >
       <div
-        class="bg-warm-50 rounded-sm max-w-2xl w-full max-h-[90vh] overflow-y-auto border-l-4 border-clay-400"
+        class="bg-warm-50 max-w-2xl w-full max-h-[90vh] overflow-y-auto border-t-4 border-ink"
       >
-        <div class="p-6">
+        <div class="p-6 sm:p-8">
           <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold text-clay-800 font-display lowercase">
+            <h2 class="text-2xl font-display font-medium text-ink lowercase">
               your workshop selection
             </h2>
             <button
               @click="showCheckout = false"
-              class="text-clay-400 hover:text-clay-600 transition-colors"
+              aria-label="Close"
+              class="text-clay-400 hover:text-ink transition-colors"
             >
               <svg
                 class="w-6 h-6"
@@ -289,43 +168,22 @@
             <div
               v-for="workshop in cart"
               :key="workshop.slug"
-              class="flex items-center justify-between p-4 border border-clay-200 rounded-sm mb-3 bg-warm-100"
+              class="flex items-center justify-between py-3 border-b border-dotted border-clay-400"
             >
-              <div class="flex items-center">
-                <div class="mr-3">
-                  <span class="text-xs font-mono text-clay-600 bg-clay-200 px-2 py-1 rounded-sm">
-                    {{ workshop.addedOrder }}/12
-                  </span>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-clay-800 font-serif lowercase">
-                    {{ workshop.title.toLowerCase() }}
-                  </h3>
-                  <p class="text-sm text-clay-600">
-                    {{
-                      workshop.city.charAt(0).toUpperCase() +
-                      workshop.city.slice(1)
-                    }}
-                  </p>
-                </div>
+              <div class="flex items-baseline gap-3">
+                <span class="font-mono text-xs text-clay-400">
+                  {{ String(workshop.number).padStart(2, "0") }}
+                </span>
+                <h3 class="font-display text-lg text-ink lowercase">
+                  {{ workshop.title.toLowerCase() }}
+                </h3>
               </div>
               <button
                 @click="toggleCart(workshop)"
-                class="text-clay-500 hover:text-clay-700 transition-colors"
+                aria-label="Remove"
+                class="font-mono text-xs text-clay-500 hover:text-accent transition-colors lowercase"
               >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                  />
-                </svg>
+                remove
               </button>
             </div>
           </div>
@@ -333,38 +191,38 @@
           <!-- Checkout Form -->
           <form @submit.prevent="submitInterest" class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+              <label class="block text-sm text-clay-700 mb-2 font-mono lowercase"
                 >name *</label
               >
               <input
                 v-model="checkoutForm.name"
                 type="text"
                 required
-                class="w-full px-4 py-2 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
+                class="w-full px-4 py-2 bg-warm-50 border border-clay-300 focus:ring-1 focus:ring-ink focus:border-ink"
                 placeholder="your full name"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+              <label class="block text-sm text-clay-700 mb-2 font-mono lowercase"
                 >email *</label
               >
               <input
                 v-model="checkoutForm.email"
                 type="email"
                 required
-                class="w-full px-4 py-2 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
+                class="w-full px-4 py-2 bg-warm-50 border border-clay-300 focus:ring-1 focus:ring-ink focus:border-ink"
                 placeholder="your@email.com"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-clay-700 mb-2 font-mono lowercase"
+              <label class="block text-sm text-clay-700 mb-2 font-mono lowercase"
                 >city *</label
               >
               <input
                 v-model="checkoutForm.city"
                 type="text"
                 required
-                class="w-full px-4 py-2 border border-clay-300 rounded-sm focus:ring-2 focus:ring-warm-500 focus:border-warm-500"
+                class="w-full px-4 py-2 bg-warm-50 border border-clay-300 focus:ring-1 focus:ring-ink focus:border-ink"
                 placeholder="your city"
               />
               <p class="text-xs text-clay-500 mt-1">
@@ -375,14 +233,14 @@
               <button
                 type="button"
                 @click="showCheckout = false"
-                class="flex-1 px-6 py-3 border border-clay-300 text-clay-700 rounded-sm hover:bg-clay-50 transition-colors lowercase"
+                class="flex-1 px-6 py-3 border border-clay-300 text-clay-700 hover:border-ink hover:text-ink transition-colors lowercase"
               >
                 continue browsing
               </button>
               <button
                 type="submit"
                 :disabled="isSubmitting"
-                class="flex-1 px-6 py-3 bg-warm-600 text-white rounded-sm hover:bg-warm-700 transition-colors disabled:opacity-50 border border-warm-700 lowercase"
+                class="flex-1 px-6 py-3 bg-ink text-warm-50 hover:bg-ink-700 transition-colors disabled:opacity-50 lowercase"
               >
                 {{ isSubmitting ? "submitting..." : "submit interest" }}
               </button>
@@ -395,13 +253,13 @@
     <!-- Success Modal -->
     <div
       v-if="showSuccessModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+      class="fixed inset-0 bg-ink-900 bg-opacity-60 flex items-center justify-center z-50 p-4"
       @click.self="showSuccessModal = false"
     >
-      <div class="bg-warm-50 rounded-sm max-w-md w-full p-8 text-center border-l-4 border-sage-400">
+      <div class="bg-warm-50 max-w-md w-full p-8 text-center border-t-4 border-sage-500">
         <div class="mb-6">
-          <div class="text-3xl mb-4">✓</div>
-          <h2 class="text-2xl font-bold text-clay-800 mb-2 font-display lowercase">thanks!</h2>
+          <div class="text-3xl mb-4 text-sage-600">✓</div>
+          <h2 class="text-2xl font-display font-medium text-ink mb-2 lowercase">thanks!</h2>
           <p class="text-clay-600 leading-relaxed">
             we have received your workshop interest and will be in touch soon with
             next steps.
@@ -409,7 +267,7 @@
         </div>
         <button
           @click="showSuccessModal = false"
-          class="w-full px-6 py-3 bg-warm-600 text-white rounded-sm hover:bg-warm-700 transition-colors font-medium border border-warm-700 lowercase"
+          class="w-full px-6 py-3 bg-ink text-warm-50 hover:bg-ink-700 transition-colors lowercase"
         >
           continue exploring
         </button>
@@ -419,12 +277,13 @@
 </template>
 
 <script>
-import { workshops } from '@/data/workshops.js';
+import { workshops, sortChronologically } from "@/data/workshops.js";
+import BlinkingLogo from "@/components/BlinkingLogo.vue";
 
 export default {
+  components: { BlinkingLogo },
   data() {
     return {
-      selectedCity: "bangalore",
       activeCategory: "",
       cart: [],
       showCheckout: false,
@@ -435,147 +294,35 @@ export default {
         email: "",
         city: "",
       },
-      bangaloreOrder: [
-        "Thinking in Bets & Bayes",
-        "Noticing Confusion",
-        "Planning Without the Lies",
-        "Good Reasons & Rent-Paying Beliefs",
-        "Arguing Without Breaking Things",
-        "Catching Self-Deception",
-        "Untangling Goals & Trade-offs",
-        "Getting Unstuck",
-        "From Intention to Habit",
-        "Finding the Bottleneck",
-        "Thinking Together",
-        "Integration & Reflection",
-      ],
-      categoryStyles: {
-        Foundations: {
-          active: "bg-clay-600 text-warm-100 border border-clay-700",
-          inactive: "bg-clay-100 text-clay-700 hover:bg-clay-200 border border-clay-300",
-        },
-        "Self-Awareness": {
-          active: "bg-sage-600 text-warm-100 border border-sage-700",
-          inactive: "bg-sage-100 text-sage-700 hover:bg-sage-200 border border-sage-300",
-        },
-        "Critical Thinking": {
-          active: "bg-warm-600 text-white border border-warm-700",
-          inactive: "bg-warm-100 text-warm-700 hover:bg-warm-200 border border-warm-300",
-        },
-        "Decision Making": {
-          active: "bg-clay-700 text-warm-100 border border-clay-800",
-          inactive: "bg-clay-200 text-clay-800 hover:bg-clay-300 border border-clay-400",
-        },
-        Implementation: {
-          active: "bg-sage-700 text-warm-100 border border-sage-800",
-          inactive: "bg-sage-200 text-sage-800 hover:bg-sage-300 border border-sage-400",
-        },
-        Communication: {
-          active: "bg-warm-700 text-white border border-warm-800",
-          inactive: "bg-warm-200 text-warm-800 hover:bg-warm-300 border border-warm-400",
-        },
-        Integration: {
-          active: "bg-clay-800 text-warm-100 border border-clay-900",
-          inactive: "bg-clay-300 text-clay-900 hover:bg-clay-400 border border-clay-500",
-        },
-      },
       workshops,
     };
   },
   computed: {
     filteredWorkshops() {
-      if (!this.activeCategory) {
-        return this.workshops;
-      }
-      return this.workshops.filter(
-        (workshop) => workshop.category === this.activeCategory
-      );
-    },
-    orderedWorkshops() {
-      let workshopsToOrder = this.filteredWorkshops;
+      const list = this.activeCategory
+        ? this.workshops.filter(
+            (workshop) => workshop.category === this.activeCategory
+          )
+        : this.workshops;
 
-      if (this.selectedCity === "bangalore") {
-        // Create a mapping of titles to their desired order
-        const orderMap = {};
-        this.bangaloreOrder.forEach((title, index) => {
-          orderMap[title] = index;
-        });
-
-        // Sort workshops based on the Bangalore order
-        workshopsToOrder = [...workshopsToOrder].sort((a, b) => {
-          const orderA = orderMap[a.title] ?? 999;
-          const orderB = orderMap[b.title] ?? 999;
-          return orderA - orderB;
-        });
-      }
-
-      return workshopsToOrder;
+      return sortChronologically(list);
     },
     uniqueCategories() {
       // Preserve order based on first appearance in workshop sequence
       const seen = new Set();
       const orderedCategories = [];
-      
+
       for (const workshop of this.workshops) {
         if (!seen.has(workshop.category)) {
           seen.add(workshop.category);
           orderedCategories.push(workshop.category);
         }
       }
-      
+
       return orderedCategories;
     },
   },
   methods: {
-    getCategoryActiveStyle(category) {
-      return (
-        this.categoryStyles[category]?.active ||
-        "bg-gray-600 text-white shadow-md"
-      );
-    },
-    getCategoryInactiveStyle(category) {
-      return (
-        this.categoryStyles[category]?.inactive ||
-        "bg-gray-100 text-gray-700 hover:bg-gray-200"
-      );
-    },
-    hasResources(workshop) {
-      const hasSessions = !!(workshop.sessions && workshop.sessions.length);
-      const r = workshop.resources || {};
-      return hasSessions || !!(r.lumaEvent || r.youtube || r.slides);
-    },
-    addAllVisibleToCart() {
-      const list = this.orderedWorkshops;
-      let added = 0;
-      list.forEach((w) => {
-        if (!this.cart.some((item) => item.slug === w.slug)) {
-          this.cart.push({
-            ...w,
-            addedOrder: this.getWorkshopNumber(w),
-            city: this.selectedCity,
-          });
-          added += 1;
-        }
-      });
-      if (added > 0) this.saveCartToStorage();
-    },
-    removeAllVisibleFromCart() {
-      const slugs = new Set(this.orderedWorkshops.map((w) => w.slug));
-      const originalLen = this.cart.length;
-      this.cart = this.cart.filter((item) => !slugs.has(item.slug));
-      if (this.cart.length !== originalLen) this.saveCartToStorage();
-    },
-    getWorkshopNumber(workshop) {
-      // City-specific canonical order
-      if (this.selectedCity === "bangalore") {
-        const idx = this.bangaloreOrder.findIndex(
-          (title) => title === workshop.title
-        );
-        if (idx !== -1) return idx + 1;
-      }
-      // Fallback to the workshop's defined number for other cities
-      return workshop.number || 999;
-    },
     isInCart(workshop) {
       return this.cart.some((item) => item.slug === workshop.slug);
     },
@@ -586,8 +333,7 @@ export default {
       } else {
         this.cart.push({
           ...workshop,
-          addedOrder: this.getWorkshopNumber(workshop),
-          city: this.selectedCity,
+          addedOrder: workshop.number,
         });
       }
       this.saveCartToStorage();
@@ -614,13 +360,12 @@ export default {
                 "User City": this.checkoutForm.city,
                 "Selected Workshops": this.cart.map((w) => w.title).join(", "),
                 "Workshop Count": this.cart.length,
-                "Primary City": this.getPrimaryCity(),
+                "Primary City": this.checkoutForm.city,
                 "Submitted At": new Date().toISOString(),
                 "Cart Details": JSON.stringify(
                   this.cart.map((w) => ({
                     title: w.title,
-                    city: w.city,
-                    orderNumber: w.addedOrder,
+                    orderNumber: w.number,
                   }))
                 ),
               },
@@ -667,22 +412,7 @@ export default {
         this.isSubmitting = false;
       }
     },
-    getPrimaryCity() {
-      // Determine primary city based on most workshops selected from that city
-      const cityCount = this.cart.reduce((acc, workshop) => {
-        acc[workshop.city] = (acc[workshop.city] || 0) + 1;
-        return acc;
-      }, {});
-
-      return (
-        Object.keys(cityCount).reduce((a, b) =>
-          cityCount[a] > cityCount[b] ? a : b
-        ) || this.selectedCity
-      );
-    },
     openCheckout() {
-      this.checkoutForm.city =
-        this.selectedCity.charAt(0).toUpperCase() + this.selectedCity.slice(1);
       this.showCheckout = true;
     },
   },

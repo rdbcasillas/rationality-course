@@ -8,11 +8,23 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Atkinson Hyperlegible', 'system-ui', 'sans-serif'],
-        serif: ['Crimson Text', 'Georgia', 'serif'],
+        serif: ['Fraunces', 'Georgia', 'serif'],
         mono: ['JetBrains Mono', 'monospace'],
-        display: ['Crimson Text', 'Georgia', 'serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
+        hand: ['Caveat', 'cursive'],
       },
       colors: {
+        ink: {
+          DEFAULT: '#2b211a',
+          700: '#3e3128',
+          800: '#31271f',
+          900: '#1e1712',
+        },
+        accent: {
+          DEFAULT: '#b0451f',
+          600: '#b0451f',
+          700: '#8f3719',
+        },
         warm: {
           50: '#fefaf5',
           100: '#fdf2e9',

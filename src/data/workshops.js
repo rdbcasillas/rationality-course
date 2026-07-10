@@ -1,3 +1,33 @@
+// Parse human-readable session dates like "Sunday, 28 September 2025"
+// and return the earliest session's timestamp, or null if never held.
+export function firstSessionTime(workshop) {
+  if (!workshop.sessions || !workshop.sessions.length) return null;
+  const months = {
+    january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+    july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
+  };
+  const times = workshop.sessions
+    .map((s) => {
+      const m = /(\d{1,2})\s+([a-z]+)\s+(\d{4})/i.exec(s.date || "");
+      if (!m || !(m[2].toLowerCase() in months)) return null;
+      return new Date(+m[3], months[m[2].toLowerCase()], +m[1]).getTime();
+    })
+    .filter((t) => t !== null);
+  return times.length ? Math.min(...times) : null;
+}
+
+// Held workshops first (by earliest session date), then upcoming (by number)
+export function sortChronologically(list) {
+  return [...list].sort((a, b) => {
+    const dateA = firstSessionTime(a);
+    const dateB = firstSessionTime(b);
+    if (dateA !== null && dateB !== null) return dateA - dateB;
+    if (dateA !== null) return -1;
+    if (dateB !== null) return 1;
+    return a.number - b.number;
+  });
+}
+
 export const workshops = [
   {
     number: 1,
@@ -17,6 +47,7 @@ export const workshops = [
     category: "Foundations",
     categoryColor: "bg-clay-100 text-clay-700",
     slug: "noticing-uncertainty",
+    image: "/images/workshops/noticing-uncertainty.jpg",
     sessions: [
       {
         date: "Sunday, 28 September 2025",
@@ -43,6 +74,7 @@ export const workshops = [
     category: "Foundations",
     categoryColor: "bg-clay-100 text-clay-700",
     slug: "bets-and-bayes",
+    image: "/images/workshops/bets-and-bayes.jpg",
     sessions: [
       {
         date: "Sunday, 26 October 2025",
@@ -69,6 +101,7 @@ export const workshops = [
     category: "Self-Awareness",
     categoryColor: "bg-sage-100 text-sage-700",
     slug: "catching-self-deception",
+    image: "/images/workshops/catching-self-deception.jpg",
     sessions: [
       {
         date: "Sunday, 31 May 2026",
@@ -100,6 +133,7 @@ export const workshops = [
     category: "Critical Thinking",
     categoryColor: "bg-warm-100 text-warm-700",
     slug: "good-reasons",
+    image: "/images/workshops/good-reasons.jpg",
     sessions: [
       {
         date: "Saturday, 24 January 2026",
@@ -175,6 +209,7 @@ export const workshops = [
     category: "Implementation",
     categoryColor: "bg-sage-200 text-sage-800",
     slug: "realistic-planning",
+    image: "/images/workshops/realistic-planning.jpg",
     sessions: [
       {
         date: "Saturday, 29 November 2025",
@@ -244,6 +279,7 @@ export const workshops = [
     category: "Communication",
     categoryColor: "bg-warm-200 text-warm-800",
     slug: "productive-disagreement",
+    image: "/images/workshops/productive-disagreement.jpg",
     sessions: [
       {
         date: "Sunday, 8 March 2026",

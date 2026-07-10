@@ -1,150 +1,159 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <!-- Workshop Not Found -->
     <div v-if="!workshop" class="text-center py-16">
-      <h1 class="text-2xl font-bold text-clay-800 mb-4 font-display lowercase">
+      <h1 class="text-3xl font-display font-medium text-ink mb-4 lowercase">
         workshop not found
       </h1>
       <router-link
         to="/workshops"
-        class="inline-block text-warm-600 hover:text-warm-700 transition lowercase"
+        class="inline-block font-mono text-sm text-accent hover:text-accent-700 transition lowercase"
       >
-        ← back to workshops
+        ← back to the twelve
       </router-link>
     </div>
 
     <!-- Workshop Detail -->
-    <div v-else class="bg-warm-50 border-l-4 border-clay-400 shadow-sm">
-      <!-- Header Section -->
-      <div class="p-6 sm:p-8 border-b border-clay-200">
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-xs font-mono text-clay-600 bg-clay-100 px-2 py-1 rounded-sm">
-            {{ workshop.number }}/12
-          </span>
-          <span :class="['px-2 py-1 rounded-sm text-xs font-medium', workshop.categoryColor]">
-            {{ workshop.category.toLowerCase() }}
-          </span>
-        </div>
+    <article v-else class="relative">
+      <!-- oversized chapter numeral (fallback when no poster) -->
+      <div
+        v-if="!workshop.image"
+        class="ghost-num absolute -top-8 right-0 text-[10rem] md:text-[16rem] opacity-60 pointer-events-none"
+        aria-hidden="true"
+      >
+        {{ String(workshop.number).padStart(2, "0") }}
+      </div>
 
-        <h1 class="text-2xl sm:text-3xl font-bold text-clay-800 mb-3 font-serif leading-tight">
+      <!-- event poster, clipped into the journal -->
+      <figure
+        v-if="workshop.image"
+        class="relative md:absolute md:top-8 md:right-0 md:w-64 lg:w-72 w-56 mx-auto md:mx-0 mb-10 md:mb-0 rotate-2 hover:rotate-0 transition-transform duration-500"
+      >
+        <img
+          :src="workshop.image"
+          :alt="`${workshop.title} event poster`"
+          class="w-full border-8 border-white shadow-lg"
+        />
+        <figcaption class="font-hand text-lg text-clay-500 text-center mt-2">
+          from the event
+        </figcaption>
+      </figure>
+
+      <!-- Breadcrumb -->
+      <router-link
+        to="/workshops"
+        class="inline-block font-mono text-xs text-clay-500 hover:text-accent transition lowercase mb-10"
+      >
+        ← the twelve
+      </router-link>
+
+      <!-- Header -->
+      <header :class="['relative mb-14', workshop.image ? 'md:pr-80' : 'max-w-2xl']">
+        <p class="font-mono text-xs tracking-[0.25em] text-clay-500 mb-5 lowercase">
+          workshop {{ workshop.number }} of 12 · {{ workshop.category.toLowerCase() }}
+        </p>
+
+        <h1 class="text-4xl md:text-6xl font-display font-medium text-ink leading-[1.05] tracking-tight mb-6 lowercase">
           {{ workshop.title.toLowerCase() }}
         </h1>
 
-        <p class="text-clay-600 text-base leading-relaxed italic">
-          {{ workshop.goal }}
+        <p class="font-hand text-2xl text-accent -rotate-1 inline-block mb-6 lowercase">
+          {{ workshop.subtitle.toLowerCase() }}
         </p>
 
-      </div>
+        <p class="text-xl text-clay-600 leading-relaxed font-display italic border-l-2 border-ink pl-5">
+          {{ workshop.goal }}
+        </p>
+      </header>
 
-      <!-- Sessions Section -->
-      <div v-if="workshop.sessions && workshop.sessions.length" class="p-6 sm:p-8 border-b border-clay-200">
-        <h2 class="text-sm font-semibold text-clay-600 lowercase mb-4 font-mono">
-          {{ workshop.sessions.length > 1 ? 'sessions' : 'when & where' }}
+      <!-- Sessions — field log -->
+      <section v-if="workshop.sessions && workshop.sessions.length" class="mb-14">
+        <h2 class="font-mono text-xs tracking-[0.25em] text-clay-500 lowercase border-b border-clay-300 pb-3 mb-2">
+          field log — {{ workshop.sessions.length > 1 ? `${workshop.sessions.length} sessions` : "1 session" }}
         </h2>
-        <div class="space-y-3">
-          <div
-            v-for="(session, idx) in workshop.sessions"
-            :key="idx"
-            class="p-4 bg-warm-100 border border-warm-300 rounded-sm"
-          >
-            <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-clay-700 mb-3">
-              <div v-if="session.date" class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-clay-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                <span>{{ session.date }}</span>
-              </div>
-              <div v-if="session.location" class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-clay-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>{{ session.location }}</span>
-              </div>
-            </div>
-            <p v-if="session.note" class="text-xs text-clay-600 italic mb-3">
+        <div
+          v-for="(session, idx) in workshop.sessions"
+          :key="idx"
+          class="py-5 border-b border-dotted border-clay-400 flex flex-wrap items-baseline gap-x-6 gap-y-2"
+        >
+          <div class="min-w-0">
+            <p class="font-display text-lg text-ink lowercase">
+              {{ session.date }}
+            </p>
+            <p class="text-sm text-clay-600">
+              {{ session.location }}
+            </p>
+            <p v-if="session.note" class="font-hand text-lg text-accent mt-1">
               {{ session.note }}
             </p>
-            <a
-              v-if="session.lumaEvent"
-              :href="session.lumaEvent"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-sm font-medium text-warm-700 hover:text-warm-800 transition lowercase"
-            >
-              luma event page
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
           </div>
+          <a
+            v-if="session.lumaEvent"
+            :href="session.lumaEvent"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ml-auto font-mono text-xs text-clay-600 hover:text-accent border border-clay-300 hover:border-accent px-3 py-1.5 transition lowercase whitespace-nowrap"
+          >
+            event page ↗
+          </a>
         </div>
-      </div>
+      </section>
 
-      <!-- Core Ideas Section -->
-      <div class="p-6 sm:p-8 border-b border-clay-200">
-        <h2 class="text-sm font-semibold text-clay-600 lowercase mb-4 font-mono">
-          core ideas
-        </h2>
-        <ul class="space-y-2">
-          <li
-            v-for="(idea, idx) in workshop.coreIdeas"
-            :key="idx"
-            class="text-sm text-clay-700 flex items-start"
-          >
-            <span class="inline-block w-1 h-1 mt-2 mr-3 bg-clay-400 flex-shrink-0"></span>
-            {{ idea }}
-          </li>
-        </ul>
-      </div>
+      <!-- Core Ideas & Skills -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-14">
+        <div class="border-t-2 border-ink pt-5">
+          <h2 class="font-mono text-xs tracking-[0.25em] text-clay-500 lowercase mb-5">
+            core ideas
+          </h2>
+          <ul class="space-y-3">
+            <li
+              v-for="(idea, idx) in workshop.coreIdeas"
+              :key="idx"
+              class="text-clay-700 flex items-start leading-relaxed"
+            >
+              <span class="text-accent mr-3 flex-shrink-0" aria-hidden="true">✳</span>
+              {{ idea }}
+            </li>
+          </ul>
+        </div>
 
-      <!-- Skills You Build Section -->
-      <div v-if="workshop.benefits" class="p-6 sm:p-8 border-b border-clay-200">
-        <h2 class="text-sm font-semibold text-clay-600 lowercase mb-4 font-mono">
-          skills you build
-        </h2>
-        <ul class="space-y-2">
-          <li
-            v-for="(benefit, idx) in workshop.benefits"
-            :key="idx"
-            class="text-sm text-clay-700 flex items-start"
-          >
-            <span class="inline-block w-1 h-1 mt-2 mr-3 bg-sage-400 flex-shrink-0"></span>
-            {{ benefit }}
-          </li>
-        </ul>
-      </div>
+        <div v-if="workshop.benefits" class="border-t-2 border-ink pt-5">
+          <h2 class="font-mono text-xs tracking-[0.25em] text-clay-500 lowercase mb-5">
+            skills you build
+          </h2>
+          <ul class="space-y-3">
+            <li
+              v-for="(benefit, idx) in workshop.benefits"
+              :key="idx"
+              class="text-clay-700 flex items-start leading-relaxed"
+            >
+              <span class="text-sage-600 mr-3 flex-shrink-0" aria-hidden="true">→</span>
+              {{ benefit }}
+            </li>
+          </ul>
+        </div>
+      </section>
 
       <!-- Resources Section -->
-      <div v-if="workshop.resources" class="p-6 sm:p-8 bg-clay-50">
-        <h2 class="text-lg font-semibold text-clay-800 lowercase mb-4 font-display">
-          workshop resources
+      <section v-if="workshop.resources" class="mb-14">
+        <h2 class="font-mono text-xs tracking-[0.25em] text-clay-500 lowercase border-b border-clay-300 pb-3 mb-6">
+          materials
         </h2>
 
-        <div class="space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <!-- YouTube Video Link -->
           <a
             v-if="workshop.resources.youtube"
             :href="workshop.resources.youtube"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 p-4 bg-warm-100 border border-warm-300 rounded-sm hover:bg-warm-200 transition-all duration-200 group"
+            class="group flex items-center gap-4 p-5 border border-clay-300 hover:border-ink hover:bg-warm-100 transition-all duration-200"
           >
-            <div class="flex-shrink-0 w-10 h-10 bg-warm-200 rounded-sm flex items-center justify-center group-hover:bg-warm-300 transition-colors">
-              <svg class="w-5 h-5 text-warm-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <div class="text-sm font-medium text-clay-800 lowercase">workshop recording</div>
-              <div class="text-xs text-clay-600">watch on youtube</div>
-            </div>
-            <svg class="w-5 h-5 text-clay-400 group-hover:text-clay-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+            <span class="font-display text-3xl text-clay-400 group-hover:text-accent transition-colors" aria-hidden="true">▶</span>
+            <span>
+              <span class="block font-display text-lg text-ink lowercase">recording</span>
+              <span class="block font-mono text-xs text-clay-500 lowercase">watch on youtube ↗</span>
+            </span>
           </a>
 
           <!-- Slides Link -->
@@ -153,43 +162,54 @@
             :href="workshop.resources.slides"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex items-center gap-3 p-4 bg-warm-100 border border-warm-300 rounded-sm hover:bg-warm-200 transition-all duration-200 group"
+            class="group flex items-center gap-4 p-5 border border-clay-300 hover:border-ink hover:bg-warm-100 transition-all duration-200"
           >
-            <div class="flex-shrink-0 w-10 h-10 bg-warm-200 rounded-sm flex items-center justify-center group-hover:bg-warm-300 transition-colors">
-              <svg class="w-5 h-5 text-warm-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <div class="text-sm font-medium text-clay-800 lowercase">workshop slides</div>
-              <div class="text-xs text-clay-600">view presentation materials</div>
-            </div>
-            <svg class="w-5 h-5 text-clay-400 group-hover:text-clay-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+            <span class="font-display text-3xl text-clay-400 group-hover:text-accent transition-colors" aria-hidden="true">▤</span>
+            <span>
+              <span class="block font-display text-lg text-ink lowercase">slides</span>
+              <span class="block font-mono text-xs text-clay-500 lowercase">view presentation ↗</span>
+            </span>
           </a>
         </div>
-      </div>
+      </section>
 
-      <!-- Back Navigation -->
-      <div class="p-6 sm:p-8 border-t border-clay-200 bg-warm-50">
+      <!-- Prev / Next navigation -->
+      <nav class="border-t border-clay-300 pt-8 flex justify-between gap-6">
         <router-link
-          to="/workshops"
-          class="inline-flex items-center gap-2 text-sm text-warm-600 hover:text-warm-700 transition lowercase font-medium"
+          v-if="prevWorkshop"
+          :to="{ name: 'WorkshopDetail', params: { slug: prevWorkshop.slug } }"
+          class="group max-w-[45%]"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          back to workshops
+          <span class="block font-mono text-xs text-clay-500 lowercase mb-1">
+            ← previous
+          </span>
+          <span class="font-display text-lg text-ink group-hover:text-accent transition-colors lowercase">
+            {{ prevWorkshop.title.toLowerCase() }}
+          </span>
         </router-link>
-      </div>
-    </div>
+        <span v-else></span>
+
+        <router-link
+          v-if="nextWorkshop"
+          :to="{ name: 'WorkshopDetail', params: { slug: nextWorkshop.slug } }"
+          class="group max-w-[45%] text-right ml-auto"
+        >
+          <span class="block font-mono text-xs text-clay-500 lowercase mb-1">
+            next →
+          </span>
+          <span class="font-display text-lg text-ink group-hover:text-accent transition-colors lowercase">
+            {{ nextWorkshop.title.toLowerCase() }}
+          </span>
+        </router-link>
+      </nav>
+    </article>
   </div>
 </template>
 
 <script>
-import { workshops } from '@/data/workshops.js';
+import { workshops, sortChronologically } from "@/data/workshops.js";
+
+const orderedWorkshops = sortChronologically(workshops);
 
 export default {
   data() {
@@ -197,19 +217,33 @@ export default {
       workshop: null,
     };
   },
+  computed: {
+    prevWorkshop() {
+      if (!this.workshop) return null;
+      const idx = orderedWorkshops.findIndex((w) => w.slug === this.workshop.slug);
+      return idx > 0 ? orderedWorkshops[idx - 1] : null;
+    },
+    nextWorkshop() {
+      if (!this.workshop) return null;
+      const idx = orderedWorkshops.findIndex((w) => w.slug === this.workshop.slug);
+      return idx >= 0 && idx < orderedWorkshops.length - 1
+        ? orderedWorkshops[idx + 1]
+        : null;
+    },
+  },
   created() {
     this.loadWorkshop();
   },
   watch: {
-    '$route.params.slug'() {
+    "$route.params.slug"() {
       this.loadWorkshop();
-    }
+    },
   },
   methods: {
     loadWorkshop() {
       const slug = this.$route.params.slug;
-      this.workshop = workshops.find(w => w.slug === slug);
-    }
-  }
+      this.workshop = workshops.find((w) => w.slug === slug);
+    },
+  },
 };
 </script>

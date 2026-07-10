@@ -1,38 +1,27 @@
 <template>
   <div class="min-h-screen bg-warm-50 font-sans text-clay-800 relative">
-    <!-- Watermark -->
-    <div class="fixed inset-0 pointer-events-none z-0 opacity-[0.02] flex items-center justify-center">
-      <img src="/logo.png" alt="" class="max-w-[60vh] max-h-[60vh] object-contain" />
-    </div>
-    
-    <!-- Content wrapper -->
-    <div class="relative z-10">
     <!-- Header -->
-    <header class="bg-warm-100 border-b border-clay-200">
-      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+    <header class="bg-warm-50/90 backdrop-blur-sm sticky top-0 z-40 rule-double">
+      <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
           <!-- Logo/Brand -->
-          <div class="flex items-center">
-            <router-link to="/" class="flex items-center space-x-1">
-              <img
-                src="/logo.png"
-                alt="Rationality Workshops Logo"
-                class="h-8 w-8"
-              />
-              <span class="text-xl font-bold text-clay-700 font-display">
-                rationality workshops
-              </span>
-            </router-link>
-          </div>
+          <router-link to="/" class="flex items-center gap-2 group">
+            <BlinkingLogo
+              class="h-8 w-8 transition-transform duration-300 group-hover:-rotate-12"
+            />
+            <span class="text-xl font-semibold text-ink font-display lowercase tracking-tight">
+              rationality workshops
+            </span>
+          </router-link>
 
           <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center space-x-8">
+          <div class="hidden md:flex items-center gap-8">
             <router-link
               v-for="item in navItems"
               :key="item.path"
               :to="item.path"
-              class="text-clay-600 hover:text-warm-600 transition lowercase"
-              active-class="text-warm-600"
+              class="font-mono text-sm text-clay-600 hover:text-accent transition lowercase"
+              active-class="text-accent squiggle"
             >
               {{ item.name }}
             </router-link>
@@ -42,7 +31,8 @@
           <div class="flex items-center md:hidden">
             <button
               @click="mobileMenuOpen = !mobileMenuOpen"
-              class="text-clay-600 hover:text-warm-600 focus:outline-none focus:ring-2 focus:ring-warm-300 rounded-md p-2"
+              aria-label="Toggle menu"
+              class="text-clay-600 hover:text-accent focus:outline-none focus:ring-2 focus:ring-warm-300 rounded-md p-2"
             >
               <svg
                 class="h-6 w-6"
@@ -71,14 +61,14 @@
       </nav>
 
       <!-- Mobile Navigation -->
-      <div v-show="mobileMenuOpen" class="md:hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1">
+      <div v-show="mobileMenuOpen" class="md:hidden border-t border-clay-200 bg-warm-50">
+        <div class="px-4 pt-2 pb-4 space-y-1">
           <router-link
             v-for="item in navItems"
             :key="item.path"
             :to="item.path"
-            class="block px-3 py-2 rounded-md text-base font-medium text-clay-600 hover:text-warm-600 hover:bg-warm-100 lowercase"
-            active-class="text-warm-600 bg-warm-100"
+            class="block px-3 py-2 font-mono text-sm text-clay-600 hover:text-accent lowercase"
+            active-class="text-accent"
             @click="mobileMenuOpen = false"
           >
             {{ item.name }}
@@ -97,68 +87,61 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-clay-800 text-warm-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <footer class="bg-ink-900 text-warm-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <p class="font-display text-3xl md:text-4xl text-warm-100 mb-10 lowercase">
+          think clearer<span class="text-accent">.</span>
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
           <!-- About Section -->
           <div>
-            <h3 class="text-lg font-semibold mb-4">
-              Rationality Workshop Series
-            </h3>
-            <p class="text-warm-200 text-sm leading-relaxed text-justify">
+            <h3 class="font-mono text-xs tracking-widest text-warm-400 mb-3 lowercase">the series</h3>
+            <p class="text-warm-200 text-sm leading-relaxed">
               A 12-week journey to develop clearer thinking, better
               decision-making, and more effective problem-solving skills through
               practical rationality techniques.
             </p>
           </div>
 
-
           <!-- Contact -->
           <div>
-            <h3 class="text-lg font-semibold mb-4">Get in Touch</h3>
-            <p class="text-warm-200 text-sm mb-3">
+            <h3 class="font-mono text-xs tracking-widest text-warm-400 mb-3 lowercase">get in touch</h3>
+            <p class="text-warm-200 text-sm mb-2">
               Have questions about the workshops or want to learn more?
             </p>
-            <div class="text-sm">
-              <p class="text-warm-200">Reach out to:</p>
-              <a
-                href="mailto:contact@rationalityworkshops.com"
-                class="text-warm-400 hover:text-warm-300 transition-colors"
-              >
-                contact@rationalityworkshops.com
-              </a>
-            </div>
+            <a
+              href="mailto:contact@rationalityworkshops.com"
+              class="font-mono text-sm text-warm-400 hover:text-warm-300 transition-colors"
+            >
+              contact@rationalityworkshops.com
+            </a>
           </div>
         </div>
 
-        <div class="border-t border-clay-700 mt-8 pt-8 text-center">
-          <p class="text-warm-300 text-sm">
-            These workshops are made possible through support from the Effective
-            Altruism Infrastructure Fund (EAIF) and Effective Ventures.
+        <div class="border-t border-ink-700 mt-10 pt-8">
+          <p class="text-warm-300/70 text-xs font-mono leading-relaxed">
+            made possible through support from the Effective Altruism
+            Infrastructure Fund (EAIF) and Effective Ventures.
           </p>
         </div>
-        <!-- Bottom Bar -->
-        <!-- <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p class="text-gray-400 text-sm">
-            © {{ new Date().getFullYear() }} Rationality Workshop Series. Building better thinking, one workshop at a time.
-          </p>
-        </div> -->
       </div>
     </footer>
-    </div>
   </div>
 </template>
 
 <script>
+import BlinkingLogo from "@/components/BlinkingLogo.vue";
+
 export default {
+  components: { BlinkingLogo },
   data() {
     return {
       mobileMenuOpen: false,
       navItems: [
-        { name: "About", path: "/about" },
-        { name: "Workshops", path: "/workshops" },
-        //{ name: "Community", path: "/community" },
-        { name: "Signup", path: "/interest" },
+        { name: "about", path: "/about" },
+        { name: "workshops", path: "/workshops" },
+        { name: "signup", path: "/interest" },
       ],
     };
   },
