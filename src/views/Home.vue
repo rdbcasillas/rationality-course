@@ -70,13 +70,13 @@
         </div>
 
         <ol>
-          <li v-for="workshop in workshops" :key="workshop.slug">
+          <li v-for="(workshop, index) in workshops" :key="workshop.slug">
             <router-link
               :to="{ name: 'WorkshopDetail', params: { slug: workshop.slug } }"
               class="group flex flex-wrap items-baseline gap-x-4 gap-y-1 py-4 border-b border-dotted border-clay-400 hover:border-solid hover:border-accent transition-colors"
             >
               <span class="font-mono text-sm text-clay-400 group-hover:text-accent transition-colors w-8">
-                {{ String(workshop.number).padStart(2, "0") }}
+                {{ String(index + 1).padStart(2, "0") }}
               </span>
               <span class="font-display text-xl md:text-2xl text-ink group-hover:translate-x-1.5 transition-transform duration-300 lowercase">
                 {{ workshop.title.toLowerCase() }}
@@ -183,14 +183,14 @@
 </template>
 
 <script>
-import { workshops } from "@/data/workshops.js";
+import { workshops, sortChronologically } from "@/data/workshops.js";
 import BlinkingLogo from "@/components/BlinkingLogo.vue";
 
 export default {
   components: { BlinkingLogo },
   data() {
     return {
-      workshops,
+      workshops: sortChronologically(workshops),
       features: [
         {
           title: "Systematic Reasoning",
