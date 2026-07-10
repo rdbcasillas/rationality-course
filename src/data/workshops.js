@@ -118,8 +118,8 @@ export const workshops = [
   {
     number: 4,
     emoji: "🔍",
-    title: "Good Reasons & Rent-Paying Beliefs",
-    subtitle: "Turning arguments into checkable predictions",
+    title: "Is Your Evidence Any Good?",
+    subtitle: "When good reasons rest on bad evidence",
     goal: "Spot 'evidence' that just sounds nice and rewrite claims so they turn into something measurable.",
     coreIdeas: [
       "Evidence quality",
